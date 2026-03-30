@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MVC / MOUNTAIN VIEW COMMONS / HEBER CITY UT</title>
     <meta name="description" content="Mountain View Commons — 5,000 SF live/work units two miles from Heber City FBO. Drive-through garages, four floor plans, gray shell from $1.05M. Walk the model unit today.">
 
@@ -383,13 +383,20 @@
             background: var(--ink);
             border-top: 3px solid var(--red);
             padding: 10px 12px;
+            padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
             display: flex;
             gap: 0;
-            transform: translateY(100%);
+            transform: translate3d(0, 100%, 0);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-transform: translate3d(0, 100%, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
-        .sticky-cta.visible { transform: translateY(0); }
+        .sticky-cta.visible {
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+        }
 
         .sticky-cta .btn {
             flex: 1;
@@ -1123,9 +1130,15 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 20px;
-            border-bottom: 1px solid transparent;
+            padding-top: calc(12px + env(safe-area-inset-top, 0px));
+            background: rgba(19, 12, 14, 0.85);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         .nav.scrolled {
@@ -1137,12 +1150,13 @@
             height: 64px;
             width: auto;
             opacity: 0.85;
-            transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: left center;
         }
 
         .nav.scrolled .nav__logo img {
-            height: 32px;
+            transform: scale(0.5);
             opacity: 0.8;
         }
 
@@ -1536,13 +1550,15 @@
             /* ---- Sticky CTA + Nav scroll state ---- */
             var stickyCta = document.querySelector('.sticky-cta');
             var nav = document.querySelector('.nav');
+            var heroEl = document.querySelector('.hero');
+            var stickyThreshold = heroEl ? heroEl.offsetHeight : 600;
             var ticking = false;
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        var y = window.scrollY;
+                        var y = window.pageYOffset;
                         if (stickyCta) {
-                            stickyCta.classList.toggle('visible', y > window.innerHeight);
+                            stickyCta.classList.toggle('visible', y > stickyThreshold);
                         }
                         if (nav) {
                             nav.classList.toggle('scrolled', y > 80);
