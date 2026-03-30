@@ -15,6 +15,7 @@
            RESET
            ================================================================ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
 
         :root {
             --paper: #F4F4F0;
@@ -34,7 +35,6 @@
             color: var(--ink);
             font-size: 12px;
             line-height: 1.5;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -1544,7 +1544,7 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+            }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
             reveals.forEach(function(el) { observer.observe(el); });
 
             /* ---- Sticky CTA + Nav scroll state ---- */
