@@ -1044,19 +1044,16 @@
            ================================================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(24px);
-            filter: blur(4px);
+            transform: translateY(12px);
             transition:
-                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity, filter;
+                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
 
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
-            filter: blur(0);
         }
 
         .reveal-delay-1 { transition-delay: 0.1s; }
@@ -1071,10 +1068,11 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
-            .reveal { opacity: 1; transform: none; filter: none; }
+            .reveal { opacity: 1; transform: none; }
             .hero__unit-id, .hero__title, .hero__meta, .hero__ctas {
                 opacity: 1; transform: none; filter: none;
             }
+            .hero__bg img { animation: none; }
         }
 
         /* ================================================================
@@ -1131,18 +1129,20 @@
             justify-content: space-between;
             padding: 12px 20px;
             padding-top: calc(12px + env(safe-area-inset-top, 0px));
-            background: rgba(19, 12, 14, 0.85);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: transparent;
+            border-bottom: 1px solid transparent;
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        -webkit-backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
         }
 
         .nav.scrolled {
             background: rgba(19, 12, 14, 0.97);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             border-bottom-color: rgba(201, 168, 76, 0.2);
         }
 
@@ -1551,8 +1551,17 @@
             var stickyCta = document.querySelector('.sticky-cta');
             var nav = document.querySelector('.nav');
             var heroEl = document.querySelector('.hero');
-            var stickyThreshold = heroEl ? heroEl.offsetHeight : 600;
             var ticking = false;
+
+            function getThreshold() {
+                return heroEl ? heroEl.offsetHeight * 0.85 : 500;
+            }
+
+            var stickyThreshold = getThreshold();
+            window.addEventListener('resize', function() {
+                stickyThreshold = getThreshold();
+            }, { passive: true });
+
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
