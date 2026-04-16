@@ -57,12 +57,13 @@
            ================================================================ */
         .nav {
             position: sticky;
-            top: 0;
+            top: -100px;
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 14px 24px;
+            padding-top: calc(114px + env(safe-area-inset-top, 0px));
             background: rgba(19, 12, 14, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
