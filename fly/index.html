@@ -427,28 +427,39 @@
            SECTION: DATA STRIP
            ================================================================ */
         .data-strip {
-            border-top: 2px solid var(--ink);
-            border-bottom: 2px solid var(--ink);
+            border-top: 1px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
             padding: 0;
         }
 
         .data-strip__inner {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--ink);
-        }
-
-        @media (min-width: 640px) {
-            .data-strip__inner {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            background: var(--paper);
         }
 
         .data-strip__cell {
             background: var(--paper);
             padding: 20px 16px;
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .data-strip__cell:first-child {
+            border-top: none;
+        }
+
+        @media (min-width: 640px) {
+            .data-strip__inner {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .data-strip__cell {
+                border-top: none;
+                border-left: 1px solid var(--rule-light);
+            }
+            .data-strip__cell:first-child {
+                border-left: none;
+            }
         }
 
         .data-strip__cell:hover {
@@ -520,9 +531,8 @@
         .lwf__grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--ink);
-            border-bottom: 2px solid var(--ink);
+            background: var(--paper);
+            border-bottom: 1px solid var(--ink);
         }
 
         @media (min-width: 768px) {
@@ -534,10 +544,18 @@
         .lwf__card {
             background: var(--paper);
             padding: 32px 24px 40px 24px;
+            border-top: 1px solid var(--rule-light);
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .lwf__card:first-child { border-top: none; }
+
         @media (min-width: 768px) {
+            .lwf__card {
+                border-top: none;
+                border-left: 1px solid var(--rule-light);
+            }
+            .lwf__card:first-child { border-left: none; }
             .lwf__card:hover {
                 background: #EAEAE6;
             }
@@ -583,25 +601,36 @@
            SECTION: SPECS + PRICING
            ================================================================ */
         .specs {
-            border-bottom: 2px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
         }
 
         .specs__grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--ink);
+            background: var(--paper);
+        }
+
+        .specs__col {
+            background: var(--paper);
+            padding: 32px 24px;
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .specs__col:first-child {
+            border-top: none;
         }
 
         @media (min-width: 768px) {
             .specs__grid {
                 grid-template-columns: 1fr 1fr;
             }
-        }
-
-        .specs__col {
-            background: var(--paper);
-            padding: 32px 24px;
+            .specs__col {
+                border-top: none;
+                border-left: 1px solid var(--rule-light);
+            }
+            .specs__col:first-child {
+                border-left: none;
+            }
         }
 
         .specs__col-label {
@@ -673,12 +702,15 @@
            SECTION: FLOOR PLANS
            ================================================================ */
         .plans {
-            border-bottom: 2px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
         }
 
         .plans__header {
             padding: 40px 24px 20px 24px;
             border-bottom: 1px solid var(--rule-light);
+        }
+
+        .plans__header-inner {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
@@ -691,26 +723,34 @@
         .plans__grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--ink);
+            background: var(--paper);
         }
 
-        @media (min-width: 640px) {
+        .plan {
+            background: var(--paper);
+            padding: 24px 20px 28px 20px;
+            border-top: 1px solid var(--rule-light);
+            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .plan:first-child { border-top: none; }
+
+        @media (min-width: 640px) and (max-width: 959.98px) {
             .plans__grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .plan { border-top: 1px solid var(--rule-light); border-left: 1px solid var(--rule-light); }
+            .plan:nth-child(1) { border-top: none; border-left: none; }
+            .plan:nth-child(2) { border-top: none; }
+            .plan:nth-child(odd) { border-left: none; }
         }
 
         @media (min-width: 960px) {
             .plans__grid {
                 grid-template-columns: repeat(4, 1fr);
             }
-        }
-
-        .plan {
-            background: var(--paper);
-            padding: 24px 20px 28px 20px;
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            .plan { border-top: none; border-left: 1px solid var(--rule-light); }
+            .plan:first-child { border-left: none; }
         }
 
         .plan:hover {
@@ -760,6 +800,183 @@
         .plan__desc {
             color: var(--ink-mid);
             text-align: right;
+        }
+
+        /* ================================================================
+           SECTION: FILM / WALKTHROUGH
+           ================================================================ */
+        .film {
+            background: var(--ink);
+            color: #ffffff;
+            padding: 72px 24px 80px 24px;
+            border-bottom: 3px solid var(--red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .film__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .film__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .film__title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: clamp(28px, 5vw, 64px);
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+            color: #ffffff;
+        }
+
+        .film__title .red { color: var(--red); }
+
+        .film__ref {
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+        }
+
+        .film__sub {
+            max-width: 520px;
+            margin-bottom: 32px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.02em;
+        }
+
+        .film__stage {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #0a0a0a;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+        }
+
+        .film__video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0a0a0a;
+        }
+
+        .film__poster {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .film__stage:hover .film__poster {
+            transform: scale(1.025);
+        }
+
+        .film__stage.is-playing .film__poster {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .film__overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
+            transition: opacity 0.3s ease;
+        }
+
+        .film__stage.is-playing .film__overlay { opacity: 0; pointer-events: none; }
+
+        .film__play {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--red);
+            color: var(--ink);
+            border: 0;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 0 0 rgba(242, 193, 78, 0.6);
+        }
+
+        .film__play::before {
+            content: '';
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 1px solid rgba(242, 193, 78, 0.4);
+            animation: filmPulse 2.2s ease-out infinite;
+        }
+
+        @keyframes filmPulse {
+            0%   { transform: scale(1);    opacity: 0.8; }
+            100% { transform: scale(1.45); opacity: 0;   }
+        }
+
+        .film__stage:hover .film__play {
+            transform: scale(1.07);
+            box-shadow: 0 14px 50px rgba(0,0,0,0.55);
+        }
+
+        .film__play svg {
+            width: 38px;
+            height: 38px;
+            margin-left: 6px;
+        }
+
+        .film__caption {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            gap: 12px;
+            pointer-events: none;
+            z-index: 3;
+            transition: opacity 0.3s ease;
+        }
+
+        .film__caption samp {
+            background: rgba(10,10,10,0.7);
+            padding: 6px 10px;
+        }
+
+        .film__stage.is-playing .film__caption { opacity: 0; }
+
+        @media (max-width: 640px) {
+            .film { padding: 48px 16px 60px 16px; }
+            .film__play { width: 76px; height: 76px; }
+            .film__play::before { width: 76px; height: 76px; }
+            .film__play svg { width: 28px; height: 28px; margin-left: 4px; }
         }
 
         /* ================================================================
@@ -815,66 +1032,119 @@
             scroll-snap-align: start;
             position: relative;
             overflow: hidden;
+            background: #0a0a0a;
         }
 
         .gallery__item img {
             width: 100%;
-            height: 300px;
+            height: 380px;
             object-fit: cover;
-            filter: grayscale(80%) contrast(1.1);
-            transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #0a0a0a;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .gallery__item:hover img {
-            filter: grayscale(0%) contrast(1);
             transform: scale(1.03);
         }
 
         .gallery__item-id {
+            display: none;
             position: absolute;
             bottom: 8px;
             left: 8px;
             font-size: 9px;
             letter-spacing: 0.12em;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.85);
             text-transform: uppercase;
-            background: rgba(10,10,10,0.6);
-            padding: 2px 6px;
+            background: rgba(10,10,10,0.72);
+            padding: 4px 8px;
+        }
+
+        .gallery__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px 32px 24px;
         }
 
         .gallery__hint {
-            text-align: center;
-            padding: 16px 0 32px 0;
             font-size: 9px;
             letter-spacing: 0.15em;
-            color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.35);
             text-transform: uppercase;
+        }
+
+        .gallery__view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #ffffff;
+            padding: 12px 18px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: transparent;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .gallery__view-all:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(242, 193, 78, 0.06);
+        }
+
+        .gallery__view-all svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .gallery__footer {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .gallery__view-all { justify-content: center; }
         }
 
         /* ================================================================
            SECTION: LOCATION / MARKET
            ================================================================ */
         .location {
-            border-bottom: 2px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
         }
 
         .location__grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1px;
-            background: var(--ink);
+            background: var(--paper);
+        }
+
+        .location__col {
+            background: var(--paper);
+            padding: 40px 24px;
+            border-top: 1px solid var(--rule-light);
+        }
+
+        .location__col:first-child {
+            border-top: none;
         }
 
         @media (min-width: 768px) {
             .location__grid {
                 grid-template-columns: 1fr 1fr;
             }
-        }
-
-        .location__col {
-            background: var(--paper);
-            padding: 40px 24px;
+            .location__col {
+                border-top: none;
+                border-left: 1px solid var(--rule-light);
+            }
+            .location__col:first-child {
+                border-left: none;
+            }
         }
 
         .location__label {
@@ -1058,7 +1328,9 @@
             transform: translateY(12px);
             transition:
                 opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
 
@@ -1206,8 +1478,8 @@
          ================================================================ -->
     <section class="hero">
         <div class="hero__bg">
-            <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/098281c8-3421-4552-a0dd-a8fa5557e86d/001_004_dji_20250711050533_0241_d_copy_554_586.jpg"
-                 alt="Mountain View Commons aerial" loading="eager">
+            <img src="photos/DJI_0697.webp"
+                 alt="Mountain View Commons — aerial exterior, Heber City, Utah" loading="eager" fetchpriority="high">
         </div>
         <div class="hero__content">
             <div class="hero__unit-id">
@@ -1272,7 +1544,7 @@
             </div>
         </div>
         <div class="lwf__grid">
-            <div class="lwf__card reveal reveal-delay-1">
+            <div class="lwf__card reveal">
                 <div class="lwf__card-idx">01</div>
                 <p class="lwf__card-key">[ FLY ]</p>
                 <h3 class="lwf__card-title">Two miles from your hangar to your front door.</h3>
@@ -1282,7 +1554,7 @@
                     toys staged and ready the moment your aircraft touches down.
                 </p>
             </div>
-            <div class="lwf__card reveal reveal-delay-2">
+            <div class="lwf__card reveal reveal-delay-1">
                 <div class="lwf__card-idx">02</div>
                 <p class="lwf__card-key">[ WORK ]</p>
                 <h3 class="lwf__card-title">Office space, shop space, or leasable commercial space.</h3>
@@ -1292,7 +1564,7 @@
                     for all-commercial use.
                 </p>
             </div>
-            <div class="lwf__card reveal reveal-delay-3">
+            <div class="lwf__card reveal reveal-delay-2">
                 <div class="lwf__card-idx">03</div>
                 <p class="lwf__card-key">[ LIVE ]</p>
                 <h3 class="lwf__card-title">A mountain residence above your own private garage.</h3>
@@ -1341,7 +1613,7 @@
                     <span class="spec-row__v">4</span>
                 </div>
             </div>
-            <div class="specs__col reveal reveal-delay-2">
+            <div class="specs__col reveal reveal-delay-1">
                 <p class="specs__col-label">[ Pricing ]</p>
                 <div class="pricing-row">
                     <p class="pricing-row__type">INTERIOR SHELL UNITS</p>
@@ -1355,7 +1627,7 @@
                 </div>
                 <div class="pricing-row">
                     <p class="pricing-row__type">FINISHED PACKAGES</p>
-                    <p class="pricing-row__price">$1.9M - $2.45M</p>
+                    <p class="pricing-row__price">$1.95M - $2.42M</p>
                     <p class="pricing-row__note">~$400 / SF / DELIVERED W/ C OF O</p>
                 </div>
             </div>
@@ -1367,11 +1639,13 @@
          ================================================================ -->
     <section class="plans" id="floor-plans">
         <div class="plans__header">
-            <h2 class="lwf__title reveal">Floor<br>Plans</h2>
-            <samp class="lwf__ref reveal">SEC-04 / 4 CONFIGURATIONS</samp>
+            <div class="plans__header-inner">
+                <h2 class="lwf__title reveal">Floor<br>Plans</h2>
+                <samp class="lwf__ref reveal">SEC-04 / 4 CONFIGURATIONS</samp>
+            </div>
         </div>
         <div class="plans__grid">
-            <div class="plan reveal reveal-delay-1">
+            <div class="plan reveal">
                 <h3 class="plan__name">The Hideout</h3>
                 <p class="plan__type">1 Bedroom</p>
                 <ul class="plan__levels">
@@ -1380,7 +1654,7 @@
                     <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE</span></li>
                 </ul>
             </div>
-            <div class="plan reveal reveal-delay-2">
+            <div class="plan reveal reveal-delay-1">
                 <h3 class="plan__name">The Frontier</h3>
                 <p class="plan__type">2 Bedrooms</p>
                 <ul class="plan__levels">
@@ -1389,7 +1663,7 @@
                     <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE, BATH</span></li>
                 </ul>
             </div>
-            <div class="plan reveal reveal-delay-1">
+            <div class="plan reveal reveal-delay-2">
                 <h3 class="plan__name">The Outlaw</h3>
                 <p class="plan__type">3 Bedrooms</p>
                 <ul class="plan__levels">
@@ -1398,7 +1672,7 @@
                     <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE, BATH</span></li>
                 </ul>
             </div>
-            <div class="plan reveal reveal-delay-2">
+            <div class="plan reveal reveal-delay-3">
                 <h3 class="plan__name">The Mercantile</h3>
                 <p class="plan__type">All Business</p>
                 <ul class="plan__levels">
@@ -1411,40 +1685,99 @@
     </section>
 
     <!-- ================================================================
+         FILM / WALKTHROUGH
+         ================================================================ -->
+    <section class="film" id="film">
+        <div class="film__inner">
+            <div class="film__header">
+                <h2 class="film__title reveal">See it in <span class="red">motion.</span></h2>
+                <samp class="film__ref reveal">SEC-05 / WALKTHROUGH</samp>
+            </div>
+            <p class="film__sub reveal">
+                A cinematic tour of Mountain View Commons &mdash; the building, the drive-through garages,
+                and the interior finishes of the model unit.
+            </p>
+            <div class="film__stage reveal" id="filmStage" role="button" tabindex="0" aria-label="Play walkthrough video">
+                <img class="film__poster"
+                     src="photos/DJI_0697.webp"
+                     alt="Mountain View Commons — aerial view">
+                <video class="film__video"
+                       id="filmVideo"
+                       preload="none"
+                       playsinline
+                       controls
+                       poster="photos/DJI_0697.webp"
+                       src="https://assets.cdn.filesafe.space/jmi9G6HcIXtki2Y1JVCz/media/69e1367f8696a78b8d68dff6.mov"></video>
+                <div class="film__overlay">
+                    <button class="film__play" type="button" aria-label="Play video">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                </div>
+                <div class="film__caption">
+                    <samp>MVC / WALKTHROUGH</samp>
+                    <samp>PRESS &gt; TO PLAY</samp>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
          GALLERY
          ================================================================ -->
     <section class="gallery">
         <div class="gallery__header">
             <h2 class="gallery__title reveal">Gallery</h2>
-            <samp class="gallery__ref reveal">SEC-05 / SITE DOCUMENTATION</samp>
+            <samp class="gallery__ref reveal">SEC-06 / PHOTOGRAPHY</samp>
         </div>
         <div class="gallery__scroll">
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/a4d98a3e-8fcf-435c-9768-b67046022d15/004_003_dji_20250711050445_0238_d_copy_99_594.jpg" alt="Aerial view" loading="lazy">
-                <samp class="gallery__item-id">IMG-001 / AERIAL</samp>
+                <img src="photos/DJI_0697.webp" alt="Mountain View Commons — aerial view with Wasatch range" loading="lazy">
+                <samp class="gallery__item-id">SITE / AERIAL NORTHWEST</samp>
             </div>
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/3b19967d-e002-4708-be30-781f1bea004c/1922+S+Hwy+40+Heber+City-27.jpg" alt="Exterior" loading="lazy">
-                <samp class="gallery__item-id">IMG-002 / EXTERIOR</samp>
+                <img src="photos/DSC04001.webp" alt="MVC exterior — three units facing the lot" loading="lazy">
+                <samp class="gallery__item-id">EXTERIOR / FACADE</samp>
             </div>
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/02e8c770-6117-405b-930e-3f4000b39a27/003_002_dji_20250711050340_0232_d_copy_180_288.jpg" alt="Development" loading="lazy">
-                <samp class="gallery__item-id">IMG-003 / DEVELOPMENT</samp>
+                <img src="photos/DSC03867.webp" alt="Secondary bathroom with modern finishes" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / BATH</samp>
             </div>
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/2e6f247b-0f03-4dce-af42-7e74efd05fed/1922+S+Hwy+40+Heber+City-20.jpg" alt="Building exterior" loading="lazy">
-                <samp class="gallery__item-id">IMG-004 / BUILDING</samp>
+                <img src="photos/DSC03807_with_fire.webp" alt="Model unit — living room with fireplace and mountain TV" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / LIVING</samp>
             </div>
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/e4774b24-6d87-4a85-b471-15f9bfcc18c9/002_001_dji_20250711050107_0220_d_copy_478_92.jpg" alt="Landscape" loading="lazy">
-                <samp class="gallery__item-id">IMG-005 / LANDSCAPE</samp>
+                <img src="photos/DSC03782-SharpenAI-Motion.webp" alt="Model unit — chef kitchen with walnut cabinetry and brass" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / KITCHEN</samp>
             </div>
             <div class="gallery__item">
-                <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/4ea9d387-9d38-44bf-9993-098a2dea8fe0/Image+4.jpeg" alt="Interior" loading="lazy">
-                <samp class="gallery__item-id">IMG-006 / INTERIOR</samp>
+                <img src="photos/DSC03822-SharpenAI-Motion.webp" alt="Model unit — great room, dining, open plan" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / GREAT ROOM</samp>
+            </div>
+            <div class="gallery__item">
+                <img src="photos/DSC04011.webp" alt="Drive-through garage with boat on trailer" loading="lazy">
+                <samp class="gallery__item-id">GARAGE / TOY BARN</samp>
+            </div>
+            <div class="gallery__item">
+                <img src="photos/DSC03657.webp" alt="Gray-shell loft with terrazzo flooring and sculptural lighting" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / LOFT</samp>
+            </div>
+            <div class="gallery__item">
+                <img src="photos/DSC03847.webp" alt="Private balcony overlooking the Heber Valley" loading="lazy">
+                <samp class="gallery__item-id">EXTERIOR / BALCONY</samp>
+            </div>
+            <div class="gallery__item">
+                <img src="photos/DSC03931.webp" alt="Primary bath — soaking tub and marble shower" loading="lazy">
+                <samp class="gallery__item-id">INTERIOR / PRIMARY BATH</samp>
             </div>
         </div>
-        <p class="gallery__hint">>>> Scroll to explore</p>
+        <div class="gallery__footer">
+            <p class="gallery__hint">>>> Scroll to explore / 10 selects</p>
+            <a href="gallery.html" class="gallery__view-all">
+                View Full Gallery / 74 Photos
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
     </section>
 
     <!-- ================================================================
@@ -1480,7 +1813,7 @@
                     <span class="dist-row__time">5 MIN</span>
                 </div>
             </div>
-            <div class="location__col reveal reveal-delay-2">
+            <div class="location__col reveal reveal-delay-1">
                 <p class="location__label">[ The Market ]</p>
                 <h2 class="location__title">Why Heber, Why Now</h2>
                 <div class="market-item">Deer Valley's $1B expansion is 15 minutes away — driving demand across the valley</div>
@@ -1592,6 +1925,35 @@
                     ticking = true;
                 }
             }, { passive: true });
+
+            /* ---- Film / walkthrough video ---- */
+            var filmStage = document.getElementById('filmStage');
+            var filmVideo = document.getElementById('filmVideo');
+            if (filmStage && filmVideo) {
+                var startFilm = function() {
+                    if (filmStage.classList.contains('is-playing')) return;
+                    filmStage.classList.add('is-playing');
+                    filmVideo.play().catch(function() {
+                        filmStage.classList.remove('is-playing');
+                    });
+                };
+                filmStage.addEventListener('click', startFilm);
+                filmStage.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        startFilm();
+                    }
+                });
+                filmVideo.addEventListener('pause', function() {
+                    if (filmVideo.ended) {
+                        filmStage.classList.remove('is-playing');
+                    }
+                });
+                filmVideo.addEventListener('ended', function() {
+                    filmStage.classList.remove('is-playing');
+                    filmVideo.currentTime = 0;
+                });
+            }
 
             /* ---- Reduced motion: disable all animations ---- */
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

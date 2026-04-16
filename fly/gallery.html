@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GALLERY / MOUNTAIN VIEW COMMONS / HEBER CITY UT</title>
+    <meta name="description" content="The full photo gallery of Mountain View Commons — model unit, drive-through garages, aerials, and site imagery at 1922 US-40, Heber City, Utah.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+           RESET
+           ================================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+
+        :root {
+            --paper: #F4F4F0;
+            --ink: #130C0E;
+            --ink-mid: #3A3A3A;
+            --ink-light: #7A7A7A;
+            --red: #F2C14E;
+            --rule-light: #C8C8C0;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: var(--ink);
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+        /* ================================================================
+           NAV (matches index.html styling)
+           ================================================================ */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background: rgba(19, 12, 14, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav__logo img {
+            height: 26px;
+            width: auto;
+            display: block;
+        }
+
+        .nav__back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            transition: color 0.2s ease;
+        }
+
+        .nav__back:hover { color: var(--red); }
+        .nav__back svg { width: 12px; height: 12px; }
+
+        .nav__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: var(--red);
+            color: var(--ink);
+            border: 2px solid var(--red);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav__cta:hover { background: transparent; color: var(--red); }
+        .nav__cta svg { width: 12px; height: 12px; }
+
+        @media (max-width: 640px) {
+            .nav { padding: 10px 14px; }
+            .nav__back span { display: none; }
+        }
+
+        /* ================================================================
+           HEADER
+           ================================================================ */
+        .header {
+            padding: 72px 24px 48px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .header__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .header__ref {
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .header__count {
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .header__title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: clamp(44px, 9vw, 124px);
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            line-height: 0.88;
+            color: #ffffff;
+        }
+
+        .header__title .red-stroke {
+            color: var(--red);
+        }
+
+        .header__sub {
+            margin-top: 20px;
+            max-width: 580px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.02em;
+        }
+
+        .header__address {
+            margin-top: 18px;
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* ================================================================
+           FILTER BAR
+           ================================================================ */
+        .filters {
+            display: none !important;
+            position: sticky;
+            top: 56px;
+            z-index: 90;
+            background: rgba(19, 12, 14, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .filters__inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filters__inner::-webkit-scrollbar { display: none; }
+
+        .filter {
+            flex-shrink: 0;
+            padding: 8px 14px;
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+            white-space: nowrap;
+        }
+
+        .filter:hover { color: #ffffff; border-color: rgba(255,255,255,0.35); }
+
+        .filter.is-active {
+            color: var(--ink);
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        /* ================================================================
+           GRID
+           ================================================================ */
+        .grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(0, auto);
+            grid-auto-flow: dense;
+            gap: 4px;
+        }
+
+        .tile {
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+            grid-column: span 6;
+            aspect-ratio: 3 / 2;
+            cursor: zoom-in;
+        }
+
+        .tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+        }
+
+        .tile:hover img {
+            transform: scale(1.04);
+            filter: brightness(1.05);
+        }
+
+        .tile__id {
+            display: none !important;
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            background: rgba(10,10,10,0.7);
+            padding: 4px 8px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .tile:hover .tile__id {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tile::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 40%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .tile:hover::after { opacity: 1; }
+
+        /* variety: cinematic full-row hero tiles + portrait tall tiles */
+        .tile--wide {
+            grid-column: span 12;
+            aspect-ratio: 21 / 9;
+        }
+        .tile--tall {
+            grid-column: span 6;
+            grid-row: span 2;
+            aspect-ratio: 3 / 4;
+        }
+
+        @media (max-width: 1000px) {
+            .tile { grid-column: span 6; }
+            .tile--wide { grid-column: span 12; aspect-ratio: 16 / 9; }
+            .tile--tall { grid-column: span 6; grid-row: span 2; aspect-ratio: 3 / 4; }
+        }
+
+        @media (max-width: 640px) {
+            .grid { padding: 12px; gap: 3px; }
+            .tile { grid-column: span 12; aspect-ratio: 3 / 2; }
+            .tile--wide { grid-column: span 12; aspect-ratio: 16 / 9; }
+            .tile--tall { grid-column: span 12; grid-row: span 1; aspect-ratio: 3 / 4; }
+            .tile__id { opacity: 1; transform: none; font-size: 8px; padding: 3px 6px; }
+        }
+
+        .tile.is-hidden { display: none; }
+
+        /* ================================================================
+           FOOTER CTA
+           ================================================================ */
+        .cta {
+            padding: 80px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .cta__kicker {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+        }
+
+        .cta__title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: clamp(28px, 5vw, 56px);
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            color: #ffffff;
+            margin-bottom: 26px;
+        }
+
+        .cta__buttons {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 28px;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: 2px solid transparent;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn--red {
+            background: var(--red);
+            color: var(--ink);
+            border-color: var(--red);
+        }
+        .btn--red:hover { background: transparent; color: var(--red); }
+
+        .btn--ghost {
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.25);
+        }
+        .btn--ghost:hover { border-color: var(--red); color: var(--red); }
+
+        .btn svg { width: 14px; height: 14px; }
+
+        /* ================================================================
+           FOOTER
+           ================================================================ */
+        .footer {
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer img { height: 20px; width: auto; display: inline-block; opacity: 0.4; margin-bottom: 14px; }
+
+        .footer__text {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            line-height: 1.8;
+        }
+
+        /* ================================================================
+           LIGHTBOX
+           ================================================================ */
+        .lb {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(8, 6, 7, 0.96);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .lb.is-open {
+            display: flex;
+            opacity: 1;
+            flex-direction: column;
+        }
+
+        .lb__bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .lb__meta {
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .lb__close {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: border-color 0.15s ease, color 0.15s ease;
+        }
+        .lb__close:hover { border-color: var(--red); color: var(--red); }
+
+        .lb__stage {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lb__img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .lb__img.is-loaded { opacity: 1; }
+
+        .lb__arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #ffffff;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+        }
+        .lb__arrow:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: var(--ink);
+        }
+        .lb__arrow svg { width: 20px; height: 20px; }
+        .lb__arrow--prev { left: 16px; }
+        .lb__arrow--next { right: 16px; }
+
+        @media (max-width: 640px) {
+            .lb__arrow { width: 44px; height: 44px; }
+            .lb__arrow--prev { left: 8px; }
+            .lb__arrow--next { right: 8px; }
+            .lb__stage { padding: 12px; }
+        }
+
+        .lb__footer {
+            display: none !important;
+            padding: 12px 20px 18px 20px;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+        }
+
+        body.lb-open { overflow: hidden; }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================
+         NAV
+         ================================================================ -->
+    <nav class="nav">
+        <a href="index.html" class="nav__back" aria-label="Back to home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Home</span>
+        </a>
+        <a href="index.html" class="nav__logo">
+            <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/feb6ebff-e1cb-45db-bb62-7ea9c83f1782/MVC-Logo_Wht_web.png?format=500w"
+                 alt="Mountain View Commons">
+        </a>
+        <a href="tel:+14355033293" class="nav__cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Schedule Walk-Through
+        </a>
+    </nav>
+
+    <!-- ================================================================
+         HEADER
+         ================================================================ -->
+    <header class="header">
+        <div class="header__meta">
+            <samp class="header__ref">SEC-05 / FULL GALLERY / 2026</samp>
+            <samp class="header__count">[ 74 FRAMES ]</samp>
+        </div>
+        <h1 class="header__title">Photo<br><span class="red-stroke">Gallery</span></h1>
+        <p class="header__sub">
+            Every frame from the completed package — aerial exteriors, drive-through garages,
+            the model unit kitchen and great room, primary suites, and the finishes that define
+            Mountain View Commons.
+        </p>
+        <p class="header__address">1922 US-40 / Heber City, UT 84032</p>
+    </header>
+
+    <!-- ================================================================
+         FILTERS
+         ================================================================ -->
+    <div class="filters">
+        <div class="filters__inner">
+            <button class="filter is-active" data-filter="all">All / 74</button>
+            <button class="filter" data-filter="aerial">Aerial</button>
+            <button class="filter" data-filter="exterior">Exterior</button>
+            <button class="filter" data-filter="kitchen">Kitchen</button>
+            <button class="filter" data-filter="living">Living</button>
+            <button class="filter" data-filter="bath">Bath &amp; Suite</button>
+            <button class="filter" data-filter="garage">Garage</button>
+            <button class="filter" data-filter="loft">Loft / Shell</button>
+        </div>
+    </div>
+
+    <!-- ================================================================
+         GRID
+         ================================================================ -->
+    <main class="grid" id="grid"></main>
+
+    <!-- ================================================================
+         CTA
+         ================================================================ -->
+    <section class="cta">
+        <p class="cta__kicker">[ Ready to walk the model? ]</p>
+        <h2 class="cta__title">See it in person.</h2>
+        <div class="cta__buttons">
+            <a href="tel:+14355033293" class="btn btn--red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Schedule Walk-Through
+            </a>
+            <a href="index.html#floor-plans" class="btn btn--ghost">>>> Floor Plans</a>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         FOOTER
+         ================================================================ -->
+    <footer class="footer">
+        <img src="VUE_horizontal_White.png" alt="VUE | Christie's International Real Estate">
+        <p class="footer__text">
+            Mountain View Commons / Heber City, Utah<br>
+            &copy;2026 Christie's International Real Estate. All rights reserved.
+        </p>
+    </footer>
+
+    <!-- ================================================================
+         LIGHTBOX
+         ================================================================ -->
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="lb__bar">
+            <samp class="lb__meta" id="lbMeta">FRAME 01 / 74</samp>
+            <button class="lb__close" id="lbClose" aria-label="Close viewer">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Close
+            </button>
+        </div>
+        <div class="lb__stage">
+            <button class="lb__arrow lb__arrow--prev" id="lbPrev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <img class="lb__img" id="lbImg" alt="">
+            <button class="lb__arrow lb__arrow--next" id="lbNext" aria-label="Next image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+        <p class="lb__footer" id="lbCaption">&nbsp;</p>
+    </div>
+
+    <!-- ================================================================
+         JS
+         ================================================================ -->
+    <script>
+        /*
+         * Photo manifest.
+         * Fields:
+         *   file    — filename inside /photos/
+         *   cat     — category for filter
+         *   label   — label shown on tile + in lightbox
+         *   layout  — optional grid hint: 'wide' | 'tall'
+         */
+        var PHOTOS = [
+            { file: "DJI_0697.webp",                     cat: "aerial",   label: "Aerial / Full Site",          layout: "wide" },
+            { file: "DJI_0698.webp",                     cat: "aerial",   label: "Aerial / West Approach" },
+            { file: "DJI_0699.webp",                     cat: "aerial",   label: "Aerial / Rooflines" },
+            { file: "DJI_0700.webp",                     cat: "aerial",   label: "Aerial / Corridor" },
+            { file: "DJI_0702.webp",                     cat: "aerial",   label: "Aerial / Facade",              layout: "wide" },
+            { file: "DSC03657.webp",                     cat: "loft",     label: "Loft / Great Room" },
+            { file: "DSC03662.webp",                     cat: "loft",     label: "Loft / Lounge" },
+            { file: "DSC03667.webp",                     cat: "loft",     label: "Loft / Kitchenette" },
+            { file: "DSC03672.webp",                     cat: "loft",     label: "Loft / Detail" },
+            { file: "DSC03677.webp",                     cat: "loft",     label: "Loft / Wide" },
+            { file: "DSC03682.webp",                     cat: "loft",     label: "Loft / Ceiling Work" },
+            { file: "DSC03687.webp",                     cat: "loft",     label: "Loft / Entry" },
+            { file: "DSC03692.webp",                     cat: "loft",     label: "Loft / Window Wall" },
+            { file: "DSC03697.webp",                     cat: "loft",     label: "Loft / Feature Light" },
+            { file: "DSC03702.webp",                     cat: "loft",     label: "Loft / Sectional" },
+            { file: "DSC03707.webp",                     cat: "loft",     label: "Loft / Corridor" },
+            { file: "DSC03712.webp",                     cat: "loft",     label: "Loft / Detail II" },
+            { file: "DSC03717.webp",                     cat: "loft",     label: "Loft / Finishes" },
+            { file: "DSC03722.webp",                     cat: "loft",     label: "Loft / Lounge II" },
+            { file: "DSC03727.webp",                     cat: "loft",     label: "Loft / Light Study" },
+            { file: "DSC03742.webp",                     cat: "loft",     label: "Stair + Elevator" },
+            { file: "DSC03747.webp",                     cat: "loft",     label: "Stair Hall" },
+            { file: "DSC03752.webp",                     cat: "loft",     label: "Upper Landing" },
+            { file: "DSC03757.webp",                     cat: "loft",     label: "Upper Corridor" },
+            { file: "DSC03762.webp",                     cat: "loft",     label: "Interior Finishes" },
+            { file: "DSC03767.webp",                     cat: "kitchen",  label: "Kitchen / Overview" },
+            { file: "DSC03772.webp",                     cat: "kitchen",  label: "Kitchen / Island" },
+            { file: "DSC03777.webp",                     cat: "kitchen",  label: "Kitchen / Range" },
+            { file: "DSC03782-SharpenAI-Motion.webp",    cat: "kitchen",  label: "Kitchen / Galley",             layout: "wide" },
+            { file: "DSC03787.webp",                     cat: "kitchen",  label: "Kitchen / Cabinetry" },
+            { file: "DSC03792.webp",                     cat: "kitchen",  label: "Kitchen / Pantry Wall" },
+            { file: "DSC03797.webp",                     cat: "kitchen",  label: "Kitchen / Hood Detail" },
+            { file: "DSC03802.webp",                     cat: "living",   label: "Living / Wide" },
+            { file: "DSC03807_with_fire.webp",           cat: "living",   label: "Living / Fireplace" },
+            { file: "DSC03812_with_fire.webp",           cat: "living",   label: "Living / Fireplace II" },
+            { file: "DSC03817_with_fire.webp",           cat: "living",   label: "Living / Fireplace III" },
+            { file: "DSC03822-SharpenAI-Motion.webp",    cat: "living",   label: "Great Room / Open Plan",       layout: "wide" },
+            { file: "DSC03827.webp",                     cat: "living",   label: "Great Room / Dining" },
+            { file: "DSC03832.webp",                     cat: "living",   label: "Dining / Light" },
+            { file: "DSC03837.webp",                     cat: "living",   label: "Dining / Wide" },
+            { file: "DSC03842.webp",                     cat: "exterior", label: "Balcony / Dusk" },
+            { file: "DSC03847.webp",                     cat: "exterior", label: "Balcony / Valley View" },
+            { file: "DSC03852.webp",                     cat: "exterior", label: "Balcony / Framing" },
+            { file: "DSC03862.webp",                     cat: "bath",     label: "Powder / Detail" },
+            { file: "DSC03867.webp",                     cat: "bath",     label: "Bath / Secondary" },
+            { file: "DSC03872.webp",                     cat: "bath",     label: "Bath / Wide" },
+            { file: "DSC03877.webp",                     cat: "bath",     label: "Closet / Built-Ins" },
+            { file: "DSC03882.webp",                     cat: "bath",     label: "Bath / Shower" },
+            { file: "DSC03891.webp",                     cat: "bath",     label: "Laundry" },
+            { file: "DSC03896.webp",                     cat: "bath",     label: "Primary / Bed" },
+            { file: "DSC03901.webp",                     cat: "bath",     label: "Primary / Wide" },
+            { file: "DSC03906.webp",                     cat: "bath",     label: "Primary Closet" },
+            { file: "DSC03916.webp",                     cat: "bath",     label: "Primary Suite Detail" },
+            { file: "DSC03921.webp",                     cat: "bath",     label: "Primary / Light" },
+            { file: "DSC03926.webp",                     cat: "bath",     label: "Primary Bath / Entry" },
+            { file: "DSC03931.webp",                     cat: "bath",     label: "Primary Bath / Tub" },
+            { file: "DSC03936.webp",                     cat: "bath",     label: "Primary Bath / Shower" },
+            { file: "DSC03941.webp",                     cat: "bath",     label: "Primary Bath / Vanity" },
+            { file: "DSC03946.webp",                     cat: "bath",     label: "Bath / Secondary II" },
+            { file: "DSC03951.webp",                     cat: "bath",     label: "Bath / Hall" },
+            { file: "DSC03956.webp",                     cat: "bath",     label: "Bath / Detail" },
+            { file: "DSC03961.webp",                     cat: "bath",     label: "Hall Bath / Wide" },
+            { file: "DSC03966.webp",                     cat: "bath",     label: "Hall Bath / Vanity" },
+            { file: "DSC03971.webp",                     cat: "bath",     label: "Guest Suite" },
+            { file: "DSC03981.webp",                     cat: "loft",     label: "Rec / Bonus" },
+            { file: "DSC03986.webp",                     cat: "loft",     label: "Bonus / Wide" },
+            { file: "DSC03991.webp",                     cat: "loft",     label: "Bonus / Detail" },
+            { file: "DSC03996.webp",                     cat: "loft",     label: "Interior / Corridor" },
+            { file: "DSC04001.webp",                     cat: "exterior", label: "Exterior / Facade",            layout: "wide" },
+            { file: "DSC04006.webp",                     cat: "exterior", label: "Exterior / Street" },
+            { file: "DSC04011.webp",                     cat: "garage",   label: "Garage / Boat Bay",            layout: "tall" },
+            { file: "DSC04013_with_fire.webp",           cat: "living",   label: "Living / Fireplace Close",     layout: "tall" },
+            { file: "DSC04014.webp",                     cat: "exterior", label: "Exterior / Entry" },
+            { file: "DSC04015.webp",                     cat: "exterior", label: "Exterior / Golden Hour" }
+        ];
+
+        var grid = document.getElementById('grid');
+        var lb = document.getElementById('lb');
+        var lbImg = document.getElementById('lbImg');
+        var lbMeta = document.getElementById('lbMeta');
+        var lbCaption = document.getElementById('lbCaption');
+        var currentIndex = 0;
+        var visibleIndexes = PHOTOS.map(function(_, i) { return i; });
+
+        /* Render tiles */
+        PHOTOS.forEach(function(p, i) {
+            var tile = document.createElement('button');
+            tile.className = 'tile';
+            if (p.layout === 'wide') tile.classList.add('tile--wide');
+            if (p.layout === 'tall') tile.classList.add('tile--tall');
+            tile.setAttribute('data-cat', p.cat);
+            tile.setAttribute('data-index', i);
+            tile.setAttribute('aria-label', 'Open ' + p.label);
+            tile.innerHTML =
+                '<img src="photos/' + p.file + '" alt="' + p.label + '" loading="lazy" decoding="async">' +
+                '<samp class="tile__id">' + p.label + '</samp>';
+            tile.addEventListener('click', function() {
+                openLightbox(parseInt(this.getAttribute('data-index'), 10));
+            });
+            grid.appendChild(tile);
+        });
+
+        /* Filters */
+        var filterButtons = document.querySelectorAll('.filter');
+        filterButtons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(function(b) { b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                var f = btn.getAttribute('data-filter');
+                var tiles = document.querySelectorAll('.tile');
+                visibleIndexes = [];
+                tiles.forEach(function(t, idx) {
+                    var show = (f === 'all') || (t.getAttribute('data-cat') === f);
+                    t.classList.toggle('is-hidden', !show);
+                    if (show) visibleIndexes.push(parseInt(t.getAttribute('data-index'), 10));
+                });
+            });
+        });
+
+        /* Lightbox */
+        function openLightbox(idx) {
+            currentIndex = idx;
+            updateLightbox();
+            lb.classList.add('is-open');
+            document.body.classList.add('lb-open');
+        }
+
+        function closeLightbox() {
+            lb.classList.remove('is-open');
+            document.body.classList.remove('lb-open');
+            lbImg.classList.remove('is-loaded');
+        }
+
+        function updateLightbox() {
+            var p = PHOTOS[currentIndex];
+            if (!p) return;
+            lbImg.classList.remove('is-loaded');
+            lbImg.src = 'photos/' + p.file;
+            lbImg.alt = p.label;
+            var onLoad = function() {
+                lbImg.classList.add('is-loaded');
+                lbImg.removeEventListener('load', onLoad);
+            };
+            lbImg.addEventListener('load', onLoad);
+            var positionInVisible = visibleIndexes.indexOf(currentIndex) + 1;
+            var total = visibleIndexes.length || PHOTOS.length;
+            lbMeta.textContent = 'FRAME ' +
+                String(positionInVisible || (currentIndex + 1)).padStart(2, '0') +
+                ' / ' + String(total).padStart(2, '0');
+            lbCaption.textContent = p.label.toUpperCase();
+        }
+
+        function step(delta) {
+            if (!visibleIndexes.length) return;
+            var pos = visibleIndexes.indexOf(currentIndex);
+            if (pos === -1) pos = 0;
+            pos = (pos + delta + visibleIndexes.length) % visibleIndexes.length;
+            currentIndex = visibleIndexes[pos];
+            updateLightbox();
+        }
+
+        document.getElementById('lbClose').addEventListener('click', closeLightbox);
+        document.getElementById('lbPrev').addEventListener('click', function() { step(-1); });
+        document.getElementById('lbNext').addEventListener('click', function() { step(1); });
+
+        lb.addEventListener('click', function(e) {
+            if (e.target === lb) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!lb.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowRight') step(1);
+            else if (e.key === 'ArrowLeft') step(-1);
+        });
+
+        /* Swipe (touch) */
+        var touchStartX = 0;
+        lb.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        lb.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
