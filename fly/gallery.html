@@ -56,8 +56,10 @@
            NAV (matches index.html styling)
            ================================================================ */
         .nav {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
             display: flex;
             justify-content: space-between;
@@ -68,19 +70,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .nav::before {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: rgba(19, 12, 14, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            pointer-events: none;
+            box-shadow: 0 -50px 0 50px rgba(19, 12, 14, 0.85);
         }
 
         .nav__logo img {
@@ -130,7 +120,7 @@
            HEADER
            ================================================================ */
         .header {
-            padding: 72px 24px 48px 24px;
+            padding: calc(120px + env(safe-area-inset-top, 0px)) 24px 48px 24px;
             max-width: 1400px;
             margin: 0 auto;
             border-bottom: 1px solid rgba(255,255,255,0.08);
