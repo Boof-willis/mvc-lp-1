@@ -1350,7 +1350,7 @@
            ================================================================ */
         .nav {
             position: fixed;
-            top: 0;
+            top: -100vh;
             left: 0;
             right: 0;
             bottom: auto;
@@ -1359,9 +1359,11 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 20px;
-            padding-top: calc(12px + env(safe-area-inset-top, 0px));
+            padding-top: calc(100vh + 12px + env(safe-area-inset-top, 0px));
             background: transparent;
             border-bottom: 1px solid transparent;
+            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             
             /* Hardware acceleration for mobile Safari stability */
             -webkit-transform: translate3d(0,0,0);
@@ -1370,22 +1372,21 @@
             backface-visibility: hidden;
         }
 
+        .nav.scrolled {
+            background: rgba(19, 12, 14, 0.97);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom-color: rgba(201, 168, 76, 0.2);
+        }
+
+        .nav.scrolled .nav__logo img {
+            transform: scale(0.65);
+            opacity: 0.8;
+        }
+
         @media (min-width: 768px) {
-            .nav {
-                transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                            border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            .nav.scrolled {
-                background: rgba(19, 12, 14, 0.97);
-                -webkit-backdrop-filter: blur(12px);
-                backdrop-filter: blur(12px);
-                border-bottom-color: rgba(201, 168, 76, 0.2);
-            }
-
             .nav.scrolled .nav__logo img {
                 transform: scale(0.5);
-                opacity: 0.8;
             }
         }
 
@@ -1399,15 +1400,24 @@
         }
 
         .nav__cta {
+            display: none;
+        }
+
+        .nav.scrolled .nav__cta {
             display: inline-flex;
         }
 
-        @media (max-width: 767px) {
-            .nav {
-                background: var(--ink);
+        @media (min-width: 768px) {
+            .nav__cta {
+                display: inline-flex;
             }
-            .nav__logo img {
-                height: 40px;
+        }
+
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                background: var(--ink);
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
             }
         }
     </style>
