@@ -27,7 +27,7 @@
             --rule-light: #C8C8C0;
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; background-color: var(--ink); }
 
         body {
             font-family: 'JetBrains Mono', 'Courier New', monospace;
@@ -1350,7 +1350,7 @@
            ================================================================ */
         .nav {
             position: fixed;
-            top: -100vh;
+            top: 0;
             left: 0;
             right: 0;
             bottom: auto;
@@ -1359,7 +1359,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 20px;
-            padding-top: calc(100vh + 12px + env(safe-area-inset-top, 0px));
+            padding-top: calc(12px + env(safe-area-inset-top, 0px));
             background: transparent;
             border-bottom: 1px solid transparent;
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
