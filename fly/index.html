@@ -1388,10 +1388,11 @@
            NAV
            ================================================================ */
         .nav {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            bottom: auto;
             z-index: 50;
             display: flex;
             align-items: center;
@@ -1400,15 +1401,18 @@
             padding-top: calc(12px + env(safe-area-inset-top, 0px));
             background: transparent;
             border-bottom: 1px solid transparent;
+            
+            /* Hardware acceleration for mobile Safari stability */
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         @media (min-width: 768px) {
             .nav {
-                position: fixed;
                 transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                             border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
             }
 
             .nav.scrolled {
