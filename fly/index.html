@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- viewport-fit=cover exposes env(safe-area-inset-top) so we can extend
-         the nav's own background up through the Dynamic Island strip. iOS
-         Safari in compact-bottom-URL-bar mode extends content under the
-         Dynamic Island regardless of this meta, so we cover it explicitly
-         via padding-top on .nav-bar (see CSS below). -->
+    <!-- viewport-fit=cover exposes env(safe-area-inset-top) so .nav-bar can
+         extend its background up through the Dynamic Island strip when
+         scrolled. Transparent at top of hero, solid --ink when scrolled. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#130C0E">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1385,7 +1383,7 @@
             background: transparent;
             border-bottom: 1px solid transparent;
             /* Extend bar upward through the iOS Dynamic Island strip so
-               the nav's background color covers it. */
+               the nav's background color covers it when scrolled. */
             padding-top: env(safe-area-inset-top, 0px);
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1399,9 +1397,7 @@
         }
 
         .nav-bar.scrolled {
-            background: rgba(19, 12, 14, 0.97);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
+            background: var(--ink);
             border-bottom-color: rgba(201, 168, 76, 0.2);
         }
 
@@ -1436,17 +1432,6 @@
         @media (min-width: 768px) {
             .nav__cta {
                 display: inline-flex;
-            }
-        }
-
-        @media (max-width: 767px) {
-            /* Mobile: drop the backdrop-filter in scrolled state and use
-               solid var(--ink) so the nav exactly matches the Dynamic
-               Island strip color (no hairline between them). */
-            .nav-bar.scrolled {
-                background: var(--ink);
-                -webkit-backdrop-filter: none;
-                backdrop-filter: none;
             }
         }
 
