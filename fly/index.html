@@ -371,45 +371,6 @@
         }
 
         /* ================================================================
-           STICKY CTA (mobile)
-           ================================================================ */
-        .sticky-cta {
-            position: fixed;
-            bottom: -100px;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: var(--ink);
-            border-top: 3px solid var(--red);
-            padding: 10px 12px;
-            padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
-            display: flex;
-            gap: 0;
-            transform: translate3d(0, 100%, 0);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            -webkit-transform: translate3d(0, 100%, 0);
-        }
-
-        .sticky-cta.visible {
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-        }
-
-        .sticky-cta .btn {
-            flex: 1;
-            padding: 16px 12px;
-            font-size: 10px;
-            min-height: 52px;
-            border-color: rgba(255,255,255,0.15);
-        }
-
-        .sticky-cta .btn--red { border-color: var(--red); }
-
-        @media (min-width: 768px) {
-            .sticky-cta { display: none; }
-        }
-
-        /* ================================================================
            SECTION: DATA STRIP
            ================================================================ */
         .data-strip {
@@ -1438,12 +1399,15 @@
         }
 
         .nav__cta {
-            display: none;
+            display: inline-flex;
         }
 
-        @media (min-width: 768px) {
-            .nav__cta {
-                display: inline-flex;
+        @media (max-width: 767px) {
+            .nav {
+                background: var(--ink);
+            }
+            .nav__logo img {
+                height: 40px;
             }
         }
     </style>
@@ -1848,19 +1812,6 @@
     </footer>
 
     <!-- ================================================================
-         STICKY CTA (mobile)
-         ================================================================ -->
-    <div class="sticky-cta">
-        <a href="tel:+14355033293" class="btn btn--red">
-            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            Schedule Walk-Through
-        </a>
-        <a href="#floor-plans" class="btn btn--white">
-            >>> Floor Plans
-        </a>
-    </div>
-
-    <!-- ================================================================
          JS
          ================================================================ -->
     <script>
@@ -1885,30 +1836,15 @@
             }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
             reveals.forEach(function(el) { observer.observe(el); });
 
-            /* ---- Sticky CTA + Nav scroll state ---- */
-            var stickyCta = document.querySelector('.sticky-cta');
+            /* ---- Nav scroll state ---- */
             var nav = document.querySelector('.nav');
-            var heroEl = document.querySelector('.hero');
             var ticking = false;
-
-            function getThreshold() {
-                return heroEl ? heroEl.offsetHeight * 0.85 : 500;
-            }
-
-            var stickyThreshold = getThreshold();
-            window.addEventListener('resize', function() {
-                stickyThreshold = getThreshold();
-            }, { passive: true });
 
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        var y = window.pageYOffset;
-                        if (stickyCta) {
-                            stickyCta.classList.toggle('visible', y > stickyThreshold);
-                        }
                         if (nav) {
-                            nav.classList.toggle('scrolled', y > 80);
+                            nav.classList.toggle('scrolled', window.pageYOffset > 80);
                         }
                         ticking = false;
                     });
