@@ -1346,46 +1346,60 @@
         }
 
         /* ================================================================
-           NAV
+           NAV — two-layer architecture (VIDL pattern)
+           ----------------------------------------------------------------
+           .navigation  outer fixed shell; the ONLY fixed element up here.
+                        Hardware-accelerated. Sits at true top: 0 so its
+                        background fills the iOS safe-area / Dynamic Island
+                        strip edge-to-edge.
+           .nav-bar     inner relative layer; holds the background color,
+                        border, and scroll-reactive transitions. Pushed
+                        below the safe area via padding-top.
+           .nav         pure flex layout wrapper for logo + CTA.
            ================================================================ */
-        .nav {
+        .navigation {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: auto;
             z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-            padding-top: calc(12px + env(safe-area-inset-top, 0px));
-            background: transparent;
-            border-bottom: 1px solid transparent;
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            
-            /* Hardware acceleration for mobile Safari stability */
             -webkit-transform: translate3d(0,0,0);
             transform: translate3d(0,0,0);
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
 
-        .nav.scrolled {
+        .nav-bar {
+            position: relative;
+            width: 100%;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            padding-top: env(safe-area-inset-top, 0px);
+            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+
+        .nav-bar.scrolled {
             background: rgba(19, 12, 14, 0.97);
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
             border-bottom-color: rgba(201, 168, 76, 0.2);
         }
 
-        .nav.scrolled .nav__logo img {
+        .nav-bar.scrolled .nav__logo img {
             transform: scale(0.65);
             opacity: 0.8;
         }
 
         @media (min-width: 768px) {
-            .nav.scrolled .nav__logo img {
+            .nav-bar.scrolled .nav__logo img {
                 transform: scale(0.5);
             }
         }
@@ -1403,7 +1417,7 @@
             display: none;
         }
 
-        .nav.scrolled .nav__cta {
+        .nav-bar.scrolled .nav__cta {
             display: inline-flex;
         }
 
@@ -1414,10 +1428,36 @@
         }
 
         @media (max-width: 767px) {
-            .nav.scrolled {
+            /* On mobile the nav is solid at all times so the Dynamic Island /
+               status-bar strip is a continuation of the navbar and page
+               content never shows above it, even during Chrome URL-bar
+               animations or iOS rubber-band overscroll. */
+            .nav-bar {
+                background: var(--ink);
+            }
+            .nav-bar.scrolled {
                 background: var(--ink);
                 -webkit-backdrop-filter: none;
                 backdrop-filter: none;
+            }
+            .nav-bar .nav__cta {
+                display: inline-flex;
+            }
+        }
+
+        /* Bulletproof the fixed shell against earlier rules on mobile */
+        @media screen and (max-width: 991px) {
+            .navigation {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: auto !important;
+            }
+            .nav-bar {
+                position: relative !important;
+                inset: auto !important;
+                width: 100% !important;
             }
         }
     </style>
@@ -1425,17 +1465,24 @@
 <body>
 
     <!-- ================================================================
-         NAV
+         NAV — two-layer (VIDL pattern)
+         outer .navigation = fixed shell
+         inner .nav-bar    = relative, carries bg + scroll state
+         innermost .nav    = flex layout (logo + CTA)
          ================================================================ -->
-    <nav class="nav">
-        <a href="#" class="nav__logo">
-            <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/feb6ebff-e1cb-45db-bb62-7ea9c83f1782/MVC-Logo_Wht_web.png?format=500w"
-                 alt="Mountain View Commons">
-        </a>
-        <a href="tel:+14355033293" class="nav__cta btn btn--red" style="padding: 10px 20px; font-size: 9px;">
-            Schedule Walk-Through
-        </a>
-    </nav>
+    <div class="navigation">
+        <div class="nav-bar">
+            <nav class="nav">
+                <a href="#" class="nav__logo">
+                    <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/feb6ebff-e1cb-45db-bb62-7ea9c83f1782/MVC-Logo_Wht_web.png?format=500w"
+                         alt="Mountain View Commons">
+                </a>
+                <a href="tel:+14355033293" class="nav__cta btn btn--red" style="padding: 10px 20px; font-size: 9px;">
+                    Schedule Walk-Through
+                </a>
+            </nav>
+        </div>
+    </div>
 
     <!-- ================================================================
          HERO
@@ -1846,16 +1893,17 @@
             }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
             reveals.forEach(function(el) { observer.observe(el); });
 
-            /* ---- Nav scroll state ---- */
-            var nav = document.querySelector('.nav');
+            /* ---- Nav scroll state (two-layer VIDL pattern) ---- */
+            var navBar = document.querySelector('.nav-bar');
+            var navigation = document.querySelector('.navigation');
             var ticking = false;
 
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        if (nav) {
-                            nav.classList.toggle('scrolled', window.pageYOffset > 80);
-                        }
+                        var scrolled = window.pageYOffset > 80;
+                        if (navBar) navBar.classList.toggle('scrolled', scrolled);
+                        if (navigation) navigation.classList.toggle('scrolled', scrolled);
                         ticking = false;
                     });
                     ticking = true;
