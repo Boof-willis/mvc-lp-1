@@ -2,7 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- NOTE: NO viewport-fit=cover. That intentionally lets iOS reserve the
+         Dynamic Island / notch / status-bar strip and paint it with the html
+         background color (var(--ink) below), so the area above the navbar is
+         a solid continuation of the page and never reveals scrolling content.
+         Same approach VIDL uses — see MOBILE-NAV-PATTERN.md. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- theme-color matches var(--ink) so Chrome Android's URL bar + iOS
+         PWA status bar blend with the page edge. -->
+    <meta name="theme-color" content="#130C0E">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>MVC / MOUNTAIN VIEW COMMONS / HEBER CITY UT</title>
     <meta name="description" content="Mountain View Commons — 5,000 SF live/work units two miles from Heber City FBO. Drive-through garages, four floor plans, gray shell from $1.05M. Walk the model unit today.">
 
@@ -1348,14 +1357,23 @@
         /* ================================================================
            NAV — two-layer architecture (VIDL pattern)
            ----------------------------------------------------------------
-           .navigation  outer fixed shell; the ONLY fixed element up here.
-                        Hardware-accelerated. Sits at true top: 0 so its
-                        background fills the iOS safe-area / Dynamic Island
-                        strip edge-to-edge.
-           .nav-bar     inner relative layer; holds the background color,
-                        border, and scroll-reactive transitions. Pushed
-                        below the safe area via padding-top.
-           .nav         pure flex layout wrapper for logo + CTA.
+           The Dynamic Island / iOS status-bar strip is handled by iOS
+           itself because we INTENTIONALLY did NOT set viewport-fit=cover
+           in the <meta viewport>. iOS reserves that strip and paints it
+           with the html background (var(--ink)). That means no
+           env(safe-area-inset-top) padding is needed anywhere.
+
+           .navigation  outer fixed shell; the ONLY fixed element near
+                        the top. Hardware-accelerated on the OUTER shell
+                        so Chrome's visual-viewport anchoring stays
+                        consistent during URL-bar show/hide.
+           .nav-bar     inner relative layer; owns background color,
+                        border, and scroll-reactive transitions. Starts
+                        transparent over the hero and animates to solid
+                        when .scrolled is added. Identical behavior on
+                        mobile and desktop — the Dynamic Island strip
+                        above it is already solid (ink) via html bg.
+           .nav         flex layout wrapper for logo + CTA.
            ================================================================ */
         .navigation {
             position: fixed;
@@ -1374,7 +1392,6 @@
             width: 100%;
             background: transparent;
             border-bottom: 1px solid transparent;
-            padding-top: env(safe-area-inset-top, 0px);
             transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -1428,24 +1445,17 @@
         }
 
         @media (max-width: 767px) {
-            /* On mobile the nav is solid at all times so the Dynamic Island /
-               status-bar strip is a continuation of the navbar and page
-               content never shows above it, even during Chrome URL-bar
-               animations or iOS rubber-band overscroll. */
-            .nav-bar {
-                background: var(--ink);
-            }
+            /* Mobile: drop the backdrop-filter in scrolled state and use
+               solid var(--ink) so the nav exactly matches the Dynamic
+               Island strip color (no hairline between them). */
             .nav-bar.scrolled {
                 background: var(--ink);
                 -webkit-backdrop-filter: none;
                 backdrop-filter: none;
             }
-            .nav-bar .nav__cta {
-                display: inline-flex;
-            }
         }
 
-        /* Bulletproof the fixed shell against earlier rules on mobile */
+        /* Bulletproof the fixed shell against any earlier rules on mobile */
         @media screen and (max-width: 991px) {
             .navigation {
                 position: fixed !important;
