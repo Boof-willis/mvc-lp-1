@@ -1,1944 +1,687 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5HZQ2M9S');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4555300974712529');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
     <meta charset="UTF-8">
-    <!-- viewport-fit=cover exposes env(safe-area-inset-top) so .nav-bar can
-         extend its background up through the Dynamic Island strip when
-         scrolled. Transparent at top of hero, solid --ink when scrolled. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#130C0E">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>MVC / MOUNTAIN VIEW COMMONS / HEBER CITY UT</title>
-    <meta name="description" content="Mountain View Commons — 5,000 SF live/work units two miles from Heber City FBO. Drive-through garages, four floor plans, gray shell from $1.05M. Walk the model unit today.">
+    <meta name="theme-color" content="#130C0E" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#130C0E" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="MVC">
+    <link rel="manifest" href="/assets/favicons/site.webmanifest">
+
+    <title>Wheels Down. Walk Home. — Mountain View Commons | Heber Valley Airport (HCR)</title>
+    <meta name="description" content="Mountain View Commons — ~5,000 sq ft of mixed-use flex space less than two miles from Heber Valley Airport (HCR). Drive-through 16' garage. Land your plane, drive home. Heber, UT. From $1.95M.">
+    <meta name="robots" content="noindex,nofollow">
+
+    <link rel="canonical" href="https://www.mtnviewcommonsut.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wheels down. Walk home.">
+    <meta property="og:description" content="Mountain View Commons — ~5,000 sq ft of mixed-use flex space, less than two miles from Heber Valley Airport. Drive-through 16' garage on the ground floor, residence above. Heber, UT. From $1.95M.">
+    <meta property="og:url" content="https://www.mtnviewcommonsut.com/fly/">
+    <meta property="og:image" content="https://www.mtnviewcommonsut.com/assets/photos/DJI_0697.webp">
+    <meta property="og:site_name" content="Mountain View Commons">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wheels down. Walk home.">
+    <meta name="twitter:description" content="Mixed-use flex space less than two miles from Heber Valley Airport. Drive-through garage on the ground, residence above. Heber, UT.">
+    <meta name="twitter:image" content="https://www.mtnviewcommonsut.com/assets/photos/DJI_0697.webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ================================================================
-           RESET
-           ================================================================ */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { overflow-x: hidden; }
-
-        :root {
-            --paper: #F4F4F0;
-            --ink: #130C0E;
-            --ink-mid: #3A3A3A;
-            --ink-light: #7A7A7A;
-            --red: #F2C14E;
-            --rule: #1A1A2E;
-            --rule-light: #C8C8C0;
-        }
-
-        html { scroll-behavior: smooth; background-color: var(--ink); }
-
-        body {
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            background: var(--paper);
-            color: var(--ink);
-            font-size: 12px;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Grain overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 256px 256px;
-        }
-
-        img { max-width: 100%; height: auto; display: block; }
-        a { color: inherit; text-decoration: none; }
-
-        /* ================================================================
-           TYPOGRAPHY
-           ================================================================ */
-        .t-macro {
-            font-family: 'Inter', 'Helvetica Neue', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            line-height: 0.9;
-        }
-
-        .t-mono {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-size: 11px;
-        }
-
-        .t-mono-sm {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 9px;
-            color: var(--ink-light);
-        }
-
-        .t-body {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 1.65;
-            letter-spacing: 0.02em;
-        }
-
-        .red { color: var(--red); }
-
-        /* ================================================================
-           LAYOUT
-           ================================================================ */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .rule { border: none; height: 2px; background: var(--ink); margin: 0; }
-        .rule--thin { height: 1px; background: var(--rule-light); }
-        .rule--red { height: 3px; background: var(--red); }
-
-        /* ================================================================
-           HERO
-           ================================================================ */
-        .hero {
-            position: relative;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            overflow: hidden;
-            background: var(--ink);
-        }
-
-        .hero__bg {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        @keyframes hero-drift {
-            0%   { transform: scale(1.05) translate(0, 0); }
-            50%  { transform: scale(1.08) translate(-0.5%, -0.3%); }
-            100% { transform: scale(1.05) translate(0, 0); }
-        }
-
-        .hero__bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.45;
-            filter: grayscale(70%) contrast(1.05) brightness(1.1);
-            animation: hero-drift 25s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-            will-change: transform;
-        }
-
-        .hero__bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: linear-gradient(
-                to top,
-                rgba(19, 12, 14, 0.92) 0%,
-                rgba(19, 12, 14, 0.55) 40%,
-                rgba(19, 12, 14, 0.3) 100%
-            );
-        }
-
-        .hero__content {
-            position: relative;
-            z-index: 3;
-            padding: 0 20px 32px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            .hero__content {
-                padding-bottom: 48px;
-            }
-        }
-
-        .hero__unit-id {
-            display: inline-block;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            margin-bottom: 16px;
-        }
-
-        .hero__unit-id samp {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            color: rgba(255,255,255,0.5);
-            text-transform: uppercase;
-        }
-
-        .hero__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(48px, 12vw + 1rem, 140px);
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            line-height: 0.86;
-            color: #ffffff;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 380px) {
-            .hero__title {
-                font-size: 44px;
-                margin-bottom: 14px;
-            }
-        }
-
-        .hero__title .red-line {
-            display: block;
-            color: #F2C14E;
-        }
-
-        .hero__meta {
-            display: flex;
-            gap: 0;
-            margin-bottom: 24px;
-            background: rgba(19, 12, 14, 0.45);
-            border: 1px solid rgba(255,255,255,0.12);
-            overflow: hidden;
-            width: fit-content;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-
-        .hero__meta-item {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-        }
-
-        .hero__meta-item + .hero__meta-item {
-            border-left: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .hero__meta-item strong {
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        .hero__meta-icon {
-            width: 14px;
-            height: 14px;
-            opacity: 0.8;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 767px) {
-            .hero__meta {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                width: 100%;
-                gap: 0;
-            }
-            .hero__meta-item {
-                font-size: 11px;
-                padding: 10px 12px;
-                justify-content: center;
-            }
-            .hero__meta-item + .hero__meta-item {
-                border-left: none;
-            }
-            .hero__meta-item:nth-child(odd) {
-                border-right: 1px solid rgba(255,255,255,0.1);
-            }
-            .hero__meta-item:nth-child(n+3) {
-                border-top: 1px solid rgba(255,255,255,0.1);
-            }
-        }
-
-        .hero__ctas {
-            display: flex;
-            gap: 0;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 767px) {
-            .hero__ctas {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .hero__ctas .btn {
-                width: 100%;
-                justify-content: center;
-                min-height: 52px;
-                font-size: 12px;
-            }
-        }
-
-        /* ================================================================
-           BUTTONS
-           ================================================================ */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 16px 28px;
-            border: 2px solid var(--ink);
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                        color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            white-space: nowrap;
-            background: transparent;
-            color: var(--ink);
-        }
-
-        .btn--red {
-            background: #F2C14E;
-            color: var(--ink);
-            border-color: #F2C14E;
-        }
-
-        .btn--red:hover {
-            filter: brightness(1.1);
-            transform: scale(1.02);
-        }
-
-        .btn--red:active {
-            filter: brightness(0.95);
-            transform: scale(0.98);
-        }
-
-        .btn--white {
-            background: rgba(255,255,255,0.04);
-            color: #ffffff;
-            border-color: rgba(255,255,255,0.25);
-            min-height: 44px;
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-        }
-
-        .btn--white:hover {
-            border-color: rgba(255,255,255,0.7);
-            color: #ffffff;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .btn--dark {
-            background: var(--ink);
-            color: var(--paper);
-            border-color: var(--ink);
-        }
-
-        .btn--dark:hover {
-            background: var(--ink);
-            border-color: var(--red);
-            color: var(--red);
-        }
-
-        .btn__icon {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn:hover .btn__icon {
-            transform: scale(1.15) rotate(-8deg);
-        }
-
-        /* ================================================================
-           SECTION: DATA STRIP
-           ================================================================ */
-        .data-strip {
-            border-top: 1px solid var(--ink);
-            border-bottom: 1px solid var(--ink);
-            padding: 0;
-        }
-
-        .data-strip__inner {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--paper);
-        }
-
-        .data-strip__cell {
-            background: var(--paper);
-            padding: 20px 16px;
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border-top: 1px solid var(--rule-light);
-        }
-
-        .data-strip__cell:first-child {
-            border-top: none;
-        }
-
-        @media (min-width: 640px) {
-            .data-strip__inner {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .data-strip__cell {
-                border-top: none;
-                border-left: 1px solid var(--rule-light);
-            }
-            .data-strip__cell:first-child {
-                border-left: none;
-            }
-        }
-
-        .data-strip__cell:hover {
-            background: #EAEAE6;
-        }
-
-        .data-strip__label {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .data-strip__value {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 24px;
-            letter-spacing: -0.03em;
-            color: var(--ink);
-            line-height: 1;
-        }
-
-        .data-strip__value .unit {
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            color: var(--ink-light);
-        }
-
-        /* ================================================================
-           SECTION: LIVE WORK FLY
-           ================================================================ */
-        .lwf {
-            padding: 0;
-        }
-
-        .lwf__header {
-            padding: 48px 20px 24px 20px;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .lwf__header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .lwf__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(32px, 6vw, 64px);
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            line-height: 0.9;
-        }
-
-        .lwf__ref {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            color: var(--ink-light);
-            text-transform: uppercase;
-        }
-
-        .lwf__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--paper);
-            border-bottom: 1px solid var(--ink);
-        }
-
-        @media (min-width: 768px) {
-            .lwf__grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .lwf__card {
-            background: var(--paper);
-            padding: 32px 24px 40px 24px;
-            border-top: 1px solid var(--rule-light);
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .lwf__card:first-child { border-top: none; }
-
-        @media (min-width: 768px) {
-            .lwf__card {
-                border-top: none;
-                border-left: 1px solid var(--rule-light);
-            }
-            .lwf__card:first-child { border-left: none; }
-            .lwf__card:hover {
-                background: #EAEAE6;
-            }
-        }
-
-        .lwf__card-idx {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 48px;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            color: var(--rule-light);
-            margin-bottom: 8px;
-        }
-
-        .lwf__card-key {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 12px;
-        }
-
-        .lwf__card-title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-            margin-bottom: 12px;
-        }
-
-        .lwf__card-body {
-            font-size: 12px;
-            line-height: 1.7;
-            color: var(--ink-mid);
-        }
-
-        /* ================================================================
-           SECTION: SPECS + PRICING
-           ================================================================ */
-        .specs {
-            border-bottom: 1px solid var(--ink);
-        }
-
-        .specs__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--paper);
-        }
-
-        .specs__col {
-            background: var(--paper);
-            padding: 32px 24px;
-            border-top: 1px solid var(--rule-light);
-        }
-
-        .specs__col:first-child {
-            border-top: none;
-        }
-
-        @media (min-width: 768px) {
-            .specs__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .specs__col {
-                border-top: none;
-                border-left: 1px solid var(--rule-light);
-            }
-            .specs__col:first-child {
-                border-left: none;
-            }
-        }
-
-        .specs__col-label {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .spec-row:last-child { border-bottom: none; }
-
-        .spec-row__k {
-            font-size: 11px;
-            color: var(--ink-mid);
-            letter-spacing: 0.05em;
-        }
-
-        .spec-row__v {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 13px;
-            letter-spacing: -0.02em;
-            text-align: right;
-        }
-
-        .pricing-row {
-            padding: 14px 0;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .pricing-row:last-child { border-bottom: none; }
-
-        .pricing-row__type {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-
-        .pricing-row__price {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 28px;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-        }
-
-        .pricing-row__note {
-            font-size: 10px;
-            color: var(--ink-light);
-            letter-spacing: 0.05em;
-            margin-top: 2px;
-        }
-
-        /* ================================================================
-           SECTION: FLOOR PLANS
-           ================================================================ */
-        .plans {
-            border-bottom: 1px solid var(--ink);
-        }
-
-        .plans__header {
-            padding: 40px 24px 20px 24px;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .plans__header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 8px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .plans__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--paper);
-        }
-
-        .plan {
-            background: var(--paper);
-            padding: 24px 20px 28px 20px;
-            border-top: 1px solid var(--rule-light);
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .plan:first-child { border-top: none; }
-
-        @media (min-width: 640px) and (max-width: 959.98px) {
-            .plans__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .plan { border-top: 1px solid var(--rule-light); border-left: 1px solid var(--rule-light); }
-            .plan:nth-child(1) { border-top: none; border-left: none; }
-            .plan:nth-child(2) { border-top: none; }
-            .plan:nth-child(odd) { border-left: none; }
-        }
-
-        @media (min-width: 960px) {
-            .plans__grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .plan { border-top: none; border-left: 1px solid var(--rule-light); }
-            .plan:first-child { border-left: none; }
-        }
-
-        .plan:hover {
-            background: #EAEAE6;
-        }
-
-        .plan__name {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .plan__type {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 16px;
-        }
-
-        .plan__levels {
-            list-style: none;
-        }
-
-        .plan__levels li {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            padding: 6px 0;
-            border-top: 1px solid var(--rule-light);
-            font-size: 10px;
-            letter-spacing: 0.05em;
-            line-height: 1.4;
-        }
-
-        .plan__lv {
-            font-weight: 700;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .plan__desc {
-            color: var(--ink-mid);
-            text-align: right;
-        }
-
-        /* ================================================================
-           SECTION: FILM / WALKTHROUGH
-           ================================================================ */
-        .film {
-            background: var(--ink);
-            color: #ffffff;
-            padding: 72px 24px 80px 24px;
-            border-bottom: 3px solid var(--red);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .film__inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .film__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 16px;
-            margin-bottom: 28px;
-            flex-wrap: wrap;
-        }
-
-        .film__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(28px, 5vw, 64px);
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            line-height: 0.95;
-            color: #ffffff;
-        }
-
-        .film__title .red { color: var(--red); }
-
-        .film__ref {
-            font-size: 9px;
-            letter-spacing: 0.14em;
-            color: rgba(255,255,255,0.35);
-            text-transform: uppercase;
-        }
-
-        .film__sub {
-            max-width: 520px;
-            margin-bottom: 32px;
-            font-size: 12px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 0.02em;
-        }
-
-        .film__stage {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            background: #0a0a0a;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            cursor: pointer;
-        }
-
-        .film__video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: #0a0a0a;
-        }
-
-        .film__poster {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-            z-index: 2;
-        }
-
-        .film__stage:hover .film__poster {
-            transform: scale(1.025);
-        }
-
-        .film__stage.is-playing .film__poster {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .film__overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
-            transition: opacity 0.3s ease;
-        }
-
-        .film__stage.is-playing .film__overlay { opacity: 0; pointer-events: none; }
-
-        .film__play {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: var(--red);
-            color: var(--ink);
-            border: 0;
-            cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 0 0 rgba(242, 193, 78, 0.6);
-        }
-
-        .film__play::before {
-            content: '';
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 1px solid rgba(242, 193, 78, 0.4);
-            animation: filmPulse 2.2s ease-out infinite;
-        }
-
-        @keyframes filmPulse {
-            0%   { transform: scale(1);    opacity: 0.8; }
-            100% { transform: scale(1.45); opacity: 0;   }
-        }
-
-        .film__stage:hover .film__play {
-            transform: scale(1.07);
-            box-shadow: 0 14px 50px rgba(0,0,0,0.55);
-        }
-
-        .film__play svg {
-            width: 38px;
-            height: 38px;
-            margin-left: 6px;
-        }
-
-        .film__caption {
-            position: absolute;
-            bottom: 16px;
-            left: 16px;
-            right: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 9px;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.8);
-            gap: 12px;
-            pointer-events: none;
-            z-index: 3;
-            transition: opacity 0.3s ease;
-        }
-
-        .film__caption samp {
-            background: rgba(10,10,10,0.7);
-            padding: 6px 10px;
-        }
-
-        .film__stage.is-playing .film__caption { opacity: 0; }
-
-        @media (max-width: 640px) {
-            .film { padding: 48px 16px 60px 16px; }
-            .film__play { width: 76px; height: 76px; }
-            .film__play::before { width: 76px; height: 76px; }
-            .film__play svg { width: 28px; height: 28px; margin-left: 4px; }
-        }
-
-        /* ================================================================
-           SECTION: GALLERY
-           ================================================================ */
-        .gallery {
-            background: var(--ink);
-            border-bottom: 3px solid var(--red);
-            padding: 40px 0 0 0;
-        }
-
-        .gallery__header {
-            padding: 0 24px 24px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(24px, 4vw, 48px);
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            color: #ffffff;
-        }
-
-        .gallery__ref {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            color: rgba(255,255,255,0.3);
-            text-transform: uppercase;
-        }
-
-        .gallery__scroll {
-            display: flex;
-            gap: 2px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 0 24px;
-            scrollbar-width: none;
-        }
-
-        .gallery__scroll::-webkit-scrollbar { display: none; }
-
-        .gallery__item {
-            flex-shrink: 0;
-            width: 70vw;
-            max-width: 520px;
-            scroll-snap-align: start;
-            position: relative;
-            overflow: hidden;
-            background: #0a0a0a;
-        }
-
-        .gallery__item img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            background: #0a0a0a;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .gallery__item:hover img {
-            transform: scale(1.03);
-        }
-
-        .gallery__item-id {
-            display: none;
-            position: absolute;
-            bottom: 8px;
-            left: 8px;
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            color: rgba(255,255,255,0.85);
-            text-transform: uppercase;
-            background: rgba(10,10,10,0.72);
-            padding: 4px 8px;
-        }
-
-        .gallery__footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 24px 32px 24px;
-        }
-
-        .gallery__hint {
-            font-size: 9px;
-            letter-spacing: 0.15em;
-            color: rgba(255,255,255,0.35);
-            text-transform: uppercase;
-        }
-
-        .gallery__view-all {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 11px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #ffffff;
-            padding: 12px 18px;
-            border: 1px solid rgba(255,255,255,0.25);
-            background: transparent;
-            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-        }
-
-        .gallery__view-all:hover {
-            border-color: var(--red);
-            color: var(--red);
-            background: rgba(242, 193, 78, 0.06);
-        }
-
-        .gallery__view-all svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        @media (max-width: 640px) {
-            .gallery__footer {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            .gallery__view-all { justify-content: center; }
-        }
-
-        /* ================================================================
-           SECTION: LOCATION / MARKET
-           ================================================================ */
-        .location {
-            border-bottom: 1px solid var(--ink);
-        }
-
-        .location__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            background: var(--paper);
-        }
-
-        .location__col {
-            background: var(--paper);
-            padding: 40px 24px;
-            border-top: 1px solid var(--rule-light);
-        }
-
-        .location__col:first-child {
-            border-top: none;
-        }
-
-        @media (min-width: 768px) {
-            .location__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .location__col {
-                border-top: none;
-                border-left: 1px solid var(--rule-light);
-            }
-            .location__col:first-child {
-                border-left: none;
-            }
-        }
-
-        .location__label {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 16px;
-        }
-
-        .location__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(22px, 3vw, 32px);
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 16px;
-        }
-
-        .location__body {
-            font-size: 12px;
-            line-height: 1.7;
-            color: var(--ink-mid);
-            margin-bottom: 24px;
-        }
-
-        .dist-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--rule-light);
-            font-size: 11px;
-        }
-
-        .dist-row:last-child { border-bottom: none; }
-
-        .dist-row__place { color: var(--ink-mid); letter-spacing: 0.05em; }
-
-        .dist-row__time {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        .market-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--rule-light);
-            font-size: 11px;
-            line-height: 1.6;
-            color: var(--ink-mid);
-            letter-spacing: 0.03em;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .market-item:last-child { border-bottom: none; }
-
-        .market-item::before {
-            content: '///';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            font-size: 8px;
-            color: var(--red);
-            letter-spacing: 0;
-        }
-
-        /* ================================================================
-           SECTION: CONTACT
-           ================================================================ */
-        .contact {
-            background: var(--ink);
-            padding: 64px 20px 120px 20px;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .contact { padding-bottom: 64px; }
-        }
-
-        .contact__label {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 16px;
-        }
-
-        .contact__title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(28px, 5vw, 56px);
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
-            line-height: 0.9;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .contact__sub {
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.35);
-            text-transform: uppercase;
-            margin-bottom: 32px;
-        }
-
-        .contact__ctas {
-            display: flex;
-            gap: 0;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 32px;
-        }
-
-        @keyframes cta-pulse {
-            0%   { box-shadow: 0 0 0 0 rgba(242, 193, 78, 0.4); }
-            70%  { box-shadow: 0 0 0 10px rgba(242, 193, 78, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(242, 193, 78, 0); }
-        }
-
-        .contact__ctas .btn--red {
-            animation: cta-pulse 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-        }
-
-        .contact__hours {
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            color: rgba(255,255,255,0.25);
-            text-transform: uppercase;
-        }
-
-        .contact__web {
-            margin-top: 12px;
-        }
-
-        .contact__web a {
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            color: var(--red);
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(230,25,25,0.3);
-            padding-bottom: 2px;
-            transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .contact__web a:hover {
-            border-color: var(--red);
-        }
-
-        /* ================================================================
-           FOOTER
-           ================================================================ */
-        .footer {
-            background: var(--ink);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 20px 24px;
-            text-align: center;
-        }
-
-        .footer__text {
-            font-size: 9px;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.45);
-            text-transform: uppercase;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ================================================================
-           SCROLL REVEAL
-           ================================================================ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(12px);
-            transition:
-                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* Accessibility: respect reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .reveal { opacity: 1; transform: none; }
-            .hero__unit-id, .hero__title, .hero__meta, .hero__ctas {
-                opacity: 1; transform: none; filter: none;
-            }
-            .hero__bg img { animation: none; }
-        }
-
-        /* ================================================================
-           HERO ENTRANCE CHOREOGRAPHY
-           ================================================================ */
-        .hero__unit-id,
-        .hero__title,
-        .hero__meta,
-        .hero__ctas {
-            opacity: 0;
-            transform: translateY(30px);
-            filter: blur(6px);
-        }
-
-        .hero-loaded .hero__unit-id {
-            opacity: 1; transform: translateY(0); filter: blur(0);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
-                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
-                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-        }
-
-        .hero-loaded .hero__title {
-            opacity: 1; transform: translateY(0); filter: blur(0);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
-                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
-                        filter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
-        }
-
-        .hero-loaded .hero__meta {
-            opacity: 1; transform: translateY(0); filter: blur(0);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s,
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s,
-                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
-        }
-
-        .hero-loaded .hero__ctas {
-            opacity: 1; transform: translateY(0); filter: blur(0);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s,
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s,
-                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
-        }
-
-        /* ================================================================
-           NAV — two-layer architecture
-           ----------------------------------------------------------------
-           .navigation  outer fixed shell; the ONLY fixed element near
-                        the top. Plain position:fixed — NO translate3d
-                        because that de-anchors iOS Safari fixed elements
-                        during URL-bar show/hide (nav hides on scroll
-                        down, reappears on scroll up). The two-layer
-                        split is what stabilizes Chrome Android, not the
-                        transform.
-           .nav-bar     inner relative layer; owns background color,
-                        border, and scroll-reactive transitions. Its
-                        padding-top: env(safe-area-inset-top) extends
-                        the bar's background up through the iOS Dynamic
-                        Island strip so the status-bar area matches the
-                        nav color at all times (transparent when over
-                        hero, solid var(--ink) when scrolled).
-           .nav         flex layout wrapper for logo + CTA.
-           ================================================================ */
-        .navigation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-        }
-
-        .nav-bar {
-            position: relative;
-            width: 100%;
-            background: transparent;
-            border-bottom: 1px solid transparent;
-            /* Extend bar upward through the iOS Dynamic Island strip so
-               the nav's background color covers it when scrolled. */
-            padding-top: env(safe-area-inset-top, 0px);
-            transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-        }
-
-        .nav-bar.scrolled {
-            background: var(--ink);
-            border-bottom-color: rgba(201, 168, 76, 0.2);
-        }
-
-        .nav-bar.scrolled .nav__logo img {
-            transform: scale(0.65);
-            opacity: 0.8;
-        }
-
-        @media (min-width: 768px) {
-            .nav-bar.scrolled .nav__logo img {
-                transform: scale(0.5);
-            }
-        }
-
-        .nav__logo img {
-            height: 64px;
-            width: auto;
-            opacity: 0.85;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            transform-origin: left center;
-        }
-
-        .nav__cta {
-            display: none;
-        }
-
-        .nav-bar.scrolled .nav__cta {
-            display: inline-flex;
-        }
-
-        @media (min-width: 768px) {
-            .nav__cta {
-                display: inline-flex;
-            }
-        }
-
-        /* Bulletproof the fixed shell against any earlier rules on mobile */
-        @media screen and (max-width: 991px) {
-            .navigation {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                bottom: auto !important;
-            }
-            .nav-bar {
-                position: relative !important;
-                inset: auto !important;
-                width: 100% !important;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/styles.css?v=20">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.mtnviewcommonsut.com/#org",
+          "name": "Mountain View Commons",
+          "alternateName": "MVC",
+          "url": "https://www.mtnviewcommonsut.com/",
+          "logo": "https://www.mtnviewcommonsut.com/assets/mvc-logo-white.png",
+          "description": "Mixed-use flex space development in Heber City, Utah. 43 units across 7 buildings, zoned for residential, commercial, and warehouse use.",
+          "telephone": "+1-435-222-2716",
+          "email": "jonathan.crosswhite@vuere.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hwy 40 + Airport Rd",
+            "addressLocality": "Heber City",
+            "addressRegion": "UT",
+            "postalCode": "84032",
+            "addressCountry": "US"
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "RealEstateAgent",
+          "@id": "https://www.mtnviewcommonsut.com/#agent",
+          "name": "Christie's International Real Estate Park City",
+          "url": "https://www.mtnviewcommonsut.com/",
+          "telephone": "+1-435-649-4757",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1790 Bonanza Dr, Ste 201",
+            "addressLocality": "Park City",
+            "addressRegion": "UT",
+            "postalCode": "84060",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "Place",
+          "@id": "https://www.mtnviewcommonsut.com/#place",
+          "name": "Mountain View Commons",
+          "description": "43-unit mixed-use development on Hwy 40 in Heber City, Utah. Less than two miles from the Heber Valley Airport (HCR).",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 40.4862,
+            "longitude": -111.4136
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Hwy 40 + Airport Rd",
+            "addressLocality": "Heber City",
+            "addressRegion": "UT",
+            "postalCode": "84032",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://www.mtnviewcommonsut.com/",
+          "name": "Mountain View Commons",
+          "publisher": { "@id": "https://www.mtnviewcommonsut.com/#org" }
+        },
+        {
+          "@type": "VideoObject",
+          "name": "Mountain View Commons — Walkthrough",
+          "description": "Cinematic walkthrough of Mountain View Commons in Heber City, Utah — the buildings, drive-through garages, and interior finishes of the Outlaw model unit.",
+          "thumbnailUrl": "https://www.mtnviewcommonsut.com/assets/photos/DJI_0697.webp",
+          "uploadDate": "2026-04-26",
+          "contentUrl": "https://assets.cdn.filesafe.space/jmi9G6HcIXtki2Y1JVCz/media/69e1367f8696a78b8d68dff6.mov",
+          "publisher": { "@id": "https://www.mtnviewcommonsut.com/#org" }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HZQ2M9S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Meta Pixel (noscript) -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4555300974712529&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel (noscript) -->
 
-    <!-- ================================================================
-         NAV — two-layer (VIDL pattern)
-         outer .navigation = fixed shell
-         inner .nav-bar    = relative, carries bg + scroll state
-         innermost .nav    = flex layout (logo + CTA)
-         ================================================================ -->
-    <div class="navigation">
-        <div class="nav-bar">
-            <nav class="nav">
-                <a href="#" class="nav__logo">
-                    <img src="https://images.squarespace-cdn.com/content/v1/66b02f1eea70765875379a74/feb6ebff-e1cb-45db-bb62-7ea9c83f1782/MVC-Logo_Wht_web.png?format=500w"
-                         alt="Mountain View Commons">
-                </a>
-                <a href="tel:+14355033293" class="nav__cta btn btn--red" style="padding: 10px 20px; font-size: 9px;">
-                    Schedule Walk-Through
-                </a>
-            </nav>
-        </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================================================================
+     NAVIGATION (LP — minimal: logo + form anchor)
+     ================================================================ -->
+<div class="navigation">
+    <div class="nav-bar">
+        <nav class="nav nav--lp" aria-label="Primary">
+            <a href="#main" class="nav__logo" aria-label="Mountain View Commons">
+                <img src="/assets/mvc-logo-white.png" alt="Mountain View Commons">
+            </a>
+            <a href="#contact" class="nav__cta btn btn--gold">Schedule a Tour</a>
+        </nav>
     </div>
+</div>
 
-    <!-- ================================================================
-         HERO
-         ================================================================ -->
-    <section class="hero">
-        <div class="hero__bg">
-            <img src="photos/DJI_0697.webp"
-                 alt="Mountain View Commons — aerial exterior, Heber City, Utah" loading="eager" fetchpriority="high">
-        </div>
-        <div class="hero__content">
-            <div class="hero__unit-id">
-                <samp>[ MVC / Heber City, UT / 40.4862N 111.4136W ]</samp>
+<main id="main">
+
+<!-- ================================================================
+     HOME HERO
+     ================================================================ -->
+<section class="home-hero">
+    <div class="home-hero__bg">
+        <video class="home-hero__video"
+               autoplay muted loop playsinline
+               preload="metadata"
+               poster="/assets/photos/DJI_0697.webp"
+               aria-hidden="true">
+            <source src="https://assets.cdn.filesafe.space/jmi9G6HcIXtki2Y1JVCz/media/69e1367f8696a78b8d68dff6.mov">
+        </video>
+    </div>
+    <div class="home-hero__content">
+        <div class="home-hero__lockup">
+            <div class="home-hero__id">
+                <span class="home-hero__id-item home-hero__id-item--d">Plane Owner's Mountain Base</span>
+                <span class="home-hero__id-item home-hero__id-item--m">Owner's Base</span>
+                <span class="home-hero__id-sep" aria-hidden="true">·</span>
+                <span class="home-hero__id-item home-hero__id-item--d">&lt;2 MI to Heber Valley Airport</span>
+                <span class="home-hero__id-item home-hero__id-item--m">&lt;2 MI to HCR</span>
+                <span class="home-hero__id-sep" aria-hidden="true">·</span>
+                <span class="home-hero__id-item home-hero__id-item--d">40.4862°N · 111.4136°W</span>
+                <span class="home-hero__id-item home-hero__id-item--m">Heber, Utah</span>
             </div>
-            <h1 class="hero__title">
-                LIVE<br>
-                WORK<br>
-                <span class="red-line">FLY</span>
-            </h1>
-            <div class="hero__meta">
-                <span class="hero__meta-item"><strong>~5,000</strong> SQ FT</span>
-                <span class="hero__meta-item"><strong>3</strong> STORIES</span>
-                <span class="hero__meta-item">
-                    <svg class="hero__meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
-                    <strong>&lt;2 MI</strong> TO FBO
-                </span>
-                <span class="hero__meta-item"><strong>4</strong> PLANS</span>
-            </div>
-            <div class="hero__ctas">
-                <a href="tel:+14355033293" class="btn btn--red">
-                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    Schedule Walk-Through
+            <h1 class="home-hero__title">LIVE<span class="home-hero__sep">/</span>WORK<span class="home-hero__sep">/</span><span class="gold-line">FLY</span></h1>
+            <p class="home-hero__sub">Wheels down. Walk home. ~5,000 sq ft of mixed-use flex space — drive-through 16' garage below, residence above. Your call on what goes where.<br>Less than two miles from Heber Valley Airport (HCR) — a 6,900' runway that handles Gulfstreams. Fifteen minutes to Deer Valley.</p>
+            <div class="home-hero__cta">
+                <a href="#contact" class="btn btn--gold">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Schedule a Walk-Through
                 </a>
-                <a href="#floor-plans" class="btn btn--white">>>> Floor Plans</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================
-         DATA STRIP
-         ================================================================ -->
-    <div class="data-strip">
-        <div class="data-strip__inner">
-            <div class="data-strip__cell reveal">
-                <p class="data-strip__label">Ground Floor</p>
-                <p class="data-strip__value">30'x60' <span class="unit">/ 1,800 SF</span></p>
-            </div>
-            <div class="data-strip__cell reveal reveal-delay-1">
-                <p class="data-strip__label">Ceiling Height</p>
-                <p class="data-strip__value">16 <span class="unit">FT</span></p>
-            </div>
-            <div class="data-strip__cell reveal reveal-delay-2">
-                <p class="data-strip__label">Garage Doors</p>
-                <p class="data-strip__value">16' <span class="unit">/ FRONT + REAR</span></p>
-            </div>
-            <div class="data-strip__cell reveal reveal-delay-3">
-                <p class="data-strip__label">Parking</p>
-                <p class="data-strip__value">~9 <span class="unit">STALLS / UNIT</span></p>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- ================================================================
-         LIVE / WORK / FLY
-         ================================================================ -->
-    <section class="lwf" id="overview">
-        <div class="lwf__header">
-            <div class="lwf__header-inner">
-                <h2 class="lwf__title reveal">The<br>Concept</h2>
-                <samp class="lwf__ref reveal">SEC-02 / OVERVIEW</samp>
-            </div>
+<!-- ================================================================
+     DATA STRIP
+     ================================================================ -->
+<div class="data-strip">
+    <div class="data-strip__inner">
+        <div class="data-strip__cell reveal">
+            <p class="data-strip__label">Footprint / Floor</p>
+            <p class="data-strip__value">30'x60' <span class="unit">/ 1,800 SF</span></p>
         </div>
-        <div class="lwf__grid">
-            <div class="lwf__card reveal">
-                <div class="lwf__card-idx">01</div>
-                <p class="lwf__card-key">[ FLY ]</p>
-                <h3 class="lwf__card-title">Two miles from your hangar to your front door.</h3>
-                <p class="lwf__card-body">
-                    Less than two miles from the Heber City FBO. Drive-through garage doors
-                    (16' roll-ups, front and rear) keep your vehicles, trailers, and
-                    toys staged and ready the moment your aircraft touches down.
-                </p>
-            </div>
-            <div class="lwf__card reveal reveal-delay-1">
-                <div class="lwf__card-idx">02</div>
-                <p class="lwf__card-key">[ WORK ]</p>
-                <h3 class="lwf__card-title">Office space, shop space, or leasable commercial space.</h3>
-                <p class="lwf__card-body">
-                    Upper floors are fully configurable. Run a business, build out a professional
-                    office, or lease it for rental income. The Mercantile floor plan is purpose-built
-                    for all-commercial use.
-                </p>
-            </div>
-            <div class="lwf__card reveal reveal-delay-2">
-                <div class="lwf__card-idx">03</div>
-                <p class="lwf__card-key">[ LIVE ]</p>
-                <h3 class="lwf__card-title">A mountain residence above your own private garage.</h3>
-                <p class="lwf__card-body">
-                    One, two, or three bedroom configurations across four floor plans. Full
-                    kitchens, living areas, and bathrooms on the upper levels. Use it as a
-                    primary residence, a mountain getaway, or a guest house.
-                </p>
-            </div>
+        <div class="data-strip__cell reveal reveal-delay-1">
+            <p class="data-strip__label">Ground Ceiling</p>
+            <p class="data-strip__value">20 <span class="unit">FT</span></p>
         </div>
-    </section>
+        <div class="data-strip__cell reveal reveal-delay-2">
+            <p class="data-strip__label">Garage Doors</p>
+            <p class="data-strip__value">16' <span class="unit">/ FRONT + REAR</span></p>
+        </div>
+        <div class="data-strip__cell reveal reveal-delay-3">
+            <p class="data-strip__label">Parking</p>
+            <p class="data-strip__value">~9 <span class="unit">STALLS / UNIT</span></p>
+        </div>
+    </div>
+</div>
 
-    <!-- ================================================================
-         SPECS + PRICING
-         ================================================================ -->
-    <section class="specs" id="pricing">
-        <div class="specs__grid">
-            <div class="specs__col reveal">
-                <p class="specs__col-label">[ Unit Specifications ]</p>
-                <div class="spec-row">
-                    <span class="spec-row__k">TOTAL AREA / UNIT</span>
-                    <span class="spec-row__v">~5,000 SF</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">STORIES</span>
-                    <span class="spec-row__v">3</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">FOOTPRINT</span>
-                    <span class="spec-row__v">30' x 60'</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">GROUND CEILING</span>
-                    <span class="spec-row__v">16 FT</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">GARAGE DOORS</span>
-                    <span class="spec-row__v">16' ROLL-UP / F+R</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">PARKING</span>
-                    <span class="spec-row__v">~9 / UNIT</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-row__k">CONFIGURATIONS</span>
-                    <span class="spec-row__v">4</span>
-                </div>
-            </div>
-            <div class="specs__col reveal reveal-delay-1">
-                <p class="specs__col-label">[ Pricing ]</p>
-                <div class="pricing-row">
-                    <p class="pricing-row__type">INTERIOR SHELL UNITS</p>
-                    <p class="pricing-row__price">$1,050,000</p>
-                    <p class="pricing-row__note">~$200 / SF</p>
-                </div>
-                <div class="pricing-row">
-                    <p class="pricing-row__type">END + DUPLEX SHELL</p>
-                    <p class="pricing-row__price">$1,250,000</p>
-                    <p class="pricing-row__note">~$250 / SF</p>
-                </div>
-                <div class="pricing-row">
-                    <p class="pricing-row__type">FINISHED PACKAGES</p>
-                    <p class="pricing-row__price">$1.95M - $2.42M</p>
-                    <p class="pricing-row__note">~$400 / SF / DELIVERED W/ C OF O</p>
-                </div>
-            </div>
+<!-- ================================================================
+     CONCEPT — Live / Work / Play
+     ================================================================ -->
+<section class="trio" id="concept" aria-labelledby="concept-title">
+    <div class="section-head">
+        <div class="section-head__inner">
+            <h2 class="section-head__title" id="concept-title">The<br>Concept</h2>
+            <samp class="section-head__ref">SEC-02 / OVERVIEW</samp>
         </div>
-    </section>
-
-    <!-- ================================================================
-         FLOOR PLANS
-         ================================================================ -->
-    <section class="plans" id="floor-plans">
-        <div class="plans__header">
-            <div class="plans__header-inner">
-                <h2 class="lwf__title reveal">Floor<br>Plans</h2>
-                <samp class="lwf__ref reveal">SEC-04 / 4 CONFIGURATIONS</samp>
-            </div>
-        </div>
-        <div class="plans__grid">
-            <div class="plan reveal">
-                <h3 class="plan__name">The Hideout</h3>
-                <p class="plan__type">1 Bedroom</p>
-                <ul class="plan__levels">
-                    <li><span class="plan__lv">LV-03</span><span class="plan__desc">BEDROOM, BATH, KITCHEN, LIVING</span></li>
-                    <li><span class="plan__lv">LV-02</span><span class="plan__desc">OFFICE SPACES, BATHROOM</span></li>
-                    <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE</span></li>
-                </ul>
-            </div>
-            <div class="plan reveal reveal-delay-1">
-                <h3 class="plan__name">The Frontier</h3>
-                <p class="plan__type">2 Bedrooms</p>
-                <ul class="plan__levels">
-                    <li><span class="plan__lv">LV-03</span><span class="plan__desc">2 BEDS, 2 BATHS, KITCHEN, LIVING</span></li>
-                    <li><span class="plan__lv">LV-02</span><span class="plan__desc">PROFESSIONAL SPACES, BATH</span></li>
-                    <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE, BATH</span></li>
-                </ul>
-            </div>
-            <div class="plan reveal reveal-delay-2">
-                <h3 class="plan__name">The Outlaw</h3>
-                <p class="plan__type">3 Bedrooms</p>
-                <ul class="plan__levels">
-                    <li><span class="plan__lv">LV-03</span><span class="plan__desc">3 BEDS, 2 BATHS</span></li>
-                    <li><span class="plan__lv">LV-02</span><span class="plan__desc">KITCHEN, DINING, LIVING, BATH</span></li>
-                    <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE, BATH</span></li>
-                </ul>
-            </div>
-            <div class="plan reveal reveal-delay-3">
-                <h3 class="plan__name">The Mercantile</h3>
-                <p class="plan__type">All Business</p>
-                <ul class="plan__levels">
-                    <li><span class="plan__lv">LV-03</span><span class="plan__desc">PROFESSIONAL, GLASS OFFICE, BATH</span></li>
-                    <li><span class="plan__lv">LV-02</span><span class="plan__desc">OPEN FLOOR PROFESSIONAL, BATH</span></li>
-                    <li><span class="plan__lv">LV-01</span><span class="plan__desc">GARAGE, BATH</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================
-         FILM / WALKTHROUGH
-         ================================================================ -->
-    <section class="film" id="film">
-        <div class="film__inner">
-            <div class="film__header">
-                <h2 class="film__title reveal">See it in <span class="red">motion.</span></h2>
-                <samp class="film__ref reveal">SEC-05 / WALKTHROUGH</samp>
-            </div>
-            <p class="film__sub reveal">
-                A cinematic tour of Mountain View Commons &mdash; the building, the drive-through garages,
-                and the interior finishes of the model unit.
+    </div>
+    <div class="trio__grid">
+        <article class="trio__card reveal">
+            <div class="trio__idx">01</div>
+            <p class="trio__key">[ LIVE ]</p>
+            <h3 class="trio__title">A mountain residence above your own private garage.</h3>
+            <p class="trio__body">
+                One, two, or three-bedroom layouts on the upper floors. Full kitchens, living areas, and primary suites. A full-time home, a Wasatch Back base camp, or a guest residence above your shop.
             </p>
-            <div class="film__stage reveal" id="filmStage" role="button" tabindex="0" aria-label="Play walkthrough video">
-                <img class="film__poster"
-                     src="photos/DJI_0697.webp"
-                     alt="Mountain View Commons — aerial view">
-                <video class="film__video"
-                       id="filmVideo"
-                       preload="none"
-                       playsinline
-                       controls
-                       poster="photos/DJI_0697.webp"
-                       src="https://assets.cdn.filesafe.space/jmi9G6HcIXtki2Y1JVCz/media/69e1367f8696a78b8d68dff6.mov"></video>
-                <div class="film__overlay">
-                    <button class="film__play" type="button" aria-label="Play video">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                </div>
-                <div class="film__caption">
-                    <samp>MVC / WALKTHROUGH</samp>
-                    <samp>PRESS &gt; TO PLAY</samp>
-                </div>
-            </div>
-        </div>
-    </section>
+        </article>
+        <article class="trio__card reveal reveal-delay-1">
+            <div class="trio__idx">02</div>
+            <p class="trio__key">[ WORK ]</p>
+            <h3 class="trio__title">Office, shop, or leasable commercial — your call.</h3>
+            <p class="trio__body">
+                Run your business from the second floor. Build out a professional studio. Lease it for income. Or take the Mercantile floor plan and go all-commercial under the same roof. Mixed-use zoning, no permits to fight.
+            </p>
+        </article>
+        <article class="trio__card reveal reveal-delay-2">
+            <div class="trio__idx">03</div>
+            <p class="trio__key">[ PLAY ]</p>
+            <h3 class="trio__title">Pull the boat through the building.</h3>
+            <p class="trio__body">
+                Drive-through 16' garage doors front and rear. 20-foot ground-floor ceilings. Truck, trailer, snowmobiles, sprinter — all straight through. Need more space? Demising walls come out: one owner combined three units into a warehouse, showroom, and studio.
+            </p>
+        </article>
+    </div>
+</section>
 
-    <!-- ================================================================
-         GALLERY
-         ================================================================ -->
-    <section class="gallery">
-        <div class="gallery__header">
-            <h2 class="gallery__title reveal">Gallery</h2>
-            <samp class="gallery__ref reveal">SEC-06 / PHOTOGRAPHY</samp>
+<!-- ================================================================
+     GALLERY PREVIEW
+     ================================================================ -->
+<section class="bg-ink" aria-labelledby="gallery-title">
+    <div class="section-head section-head--dark">
+        <div class="section-head__inner">
+            <h2 class="section-head__title" id="gallery-title">The<br>Property</h2>
+            <samp class="section-head__ref">SEC-03 / GALLERY</samp>
         </div>
-        <div class="gallery__scroll">
-            <div class="gallery__item">
-                <img src="photos/DJI_0697.webp" alt="Mountain View Commons — aerial view with Wasatch range" loading="lazy">
-                <samp class="gallery__item-id">SITE / AERIAL NORTHWEST</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC04001.webp" alt="MVC exterior — three units facing the lot" loading="lazy">
-                <samp class="gallery__item-id">EXTERIOR / FACADE</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03867.webp" alt="Secondary bathroom with modern finishes" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / BATH</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03807_with_fire.webp" alt="Model unit — living room with fireplace and mountain TV" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / LIVING</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03782-SharpenAI-Motion.webp" alt="Model unit — chef kitchen with walnut cabinetry and brass" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / KITCHEN</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03822-SharpenAI-Motion.webp" alt="Model unit — great room, dining, open plan" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / GREAT ROOM</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC04011.webp" alt="Drive-through garage with boat on trailer" loading="lazy">
-                <samp class="gallery__item-id">GARAGE / TOY BARN</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03657.webp" alt="Gray-shell loft with terrazzo flooring and sculptural lighting" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / LOFT</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03847.webp" alt="Private balcony overlooking the Heber Valley" loading="lazy">
-                <samp class="gallery__item-id">EXTERIOR / BALCONY</samp>
-            </div>
-            <div class="gallery__item">
-                <img src="photos/DSC03931.webp" alt="Primary bath — soaking tub and marble shower" loading="lazy">
-                <samp class="gallery__item-id">INTERIOR / PRIMARY BATH</samp>
-            </div>
-        </div>
-        <div class="gallery__footer">
-            <p class="gallery__hint">>>> Scroll to explore / 10 selects</p>
-            <a href="gallery.html" class="gallery__view-all">
-                View Full Gallery / 74 Photos
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-        </div>
-    </section>
+    </div>
+    <p class="gallery-frame-note">Photos show the Outlaw — our finished 3-bedroom model — for build-quality reference. Most plane owners pair the Hideout or Frontier with a hangar at HCR; either is built to your spec on order.</p>
+    <div class="home-gallery">
+        <button class="gallery-tile is-hero" data-cap="Aerial view of the development at golden hour" data-full="/assets/photos/DJI_0697.webp" type="button">
+            <img src="/assets/photos/DJI_0697.webp" alt="Mountain View Commons aerial view at sunset over the Heber Valley" loading="lazy">
+            <span class="gallery-tile__cap">Aerial · Site</span>
+        </button>
+        <button class="gallery-tile" data-cap="The Outlaw model — chef kitchen with walnut cabinetry" data-full="/assets/photos/DSC03782-SharpenAI-Motion.webp" type="button">
+            <img src="/assets/photos/DSC03782-SharpenAI-Motion.webp" alt="Model unit kitchen with walnut cabinetry, brass hardware, and waterfall island" loading="lazy">
+            <span class="gallery-tile__cap">Interior · Kitchen</span>
+        </button>
+        <button class="gallery-tile" data-cap="Living room with fireplace and mountain views" data-full="/assets/photos/DSC03807_with_fire.webp" type="button">
+            <img src="/assets/photos/DSC03807_with_fire.webp" alt="Living room with stone fireplace, mounted television, and Wasatch Range views" loading="lazy">
+            <span class="gallery-tile__cap">Interior · Living</span>
+        </button>
+        <button class="gallery-tile" data-cap="Drive-through garage with toy storage" data-full="/assets/photos/DSC04011.webp" type="button">
+            <img src="/assets/photos/DSC04011.webp" alt="Drive-through garage with 20-foot ceilings storing a boat on a trailer" loading="lazy">
+            <span class="gallery-tile__cap">Garage</span>
+        </button>
+        <button class="gallery-tile" data-cap="Exterior — three units fronting the lot" data-full="/assets/photos/DSC04001.webp" type="button">
+            <img src="/assets/photos/DSC04001.webp" alt="Mountain View Commons exterior, three mixed-use units fronting the parking lot" loading="lazy">
+            <span class="gallery-tile__cap">Exterior</span>
+        </button>
+        <button class="gallery-tile" data-cap="Primary bath with soaking tub" data-full="/assets/photos/DSC03931.webp" type="button">
+            <img src="/assets/photos/DSC03931.webp" alt="Primary bathroom with marble shower and freestanding soaking tub" loading="lazy">
+            <span class="gallery-tile__cap">Interior · Primary Bath</span>
+        </button>
+        <button class="gallery-tile" data-cap="Open great room and dining" data-full="/assets/photos/DSC03822-SharpenAI-Motion.webp" type="button">
+            <img src="/assets/photos/DSC03822-SharpenAI-Motion.webp" alt="Great room with open dining area and floor-to-ceiling windows" loading="lazy">
+            <span class="gallery-tile__cap">Interior · Great Room</span>
+        </button>
+        <button class="gallery-tile" data-cap="Balcony with valley view" data-full="/assets/photos/DSC03847.webp" type="button">
+            <img src="/assets/photos/DSC03847.webp" alt="Private balcony at Mountain View Commons overlooking the Heber Valley" loading="lazy">
+            <span class="gallery-tile__cap">Exterior · Balcony</span>
+        </button>
+        <a href="/fly/gallery.html" class="home-gallery__more" aria-label="View all 74 photos in the full gallery">
+            <span class="home-gallery__more-num">74</span>
+            <span class="home-gallery__more-label">Photos in the<br>full gallery</span>
+            <span class="home-gallery__more-arrow">View all →</span>
+        </a>
+    </div>
+</section>
 
-    <!-- ================================================================
-         LOCATION / MARKET
-         ================================================================ -->
-    <section class="location" id="location">
-        <div class="location__grid">
-            <div class="location__col reveal">
-                <p class="location__label">[ Location ]</p>
-                <h2 class="location__title">HWY 40 + Airport RD, Heber City</h2>
-                <p class="location__body">
-                    Direct access to Heber City FBO. Deer Valley in 15 minutes.
-                    Park City in 25. One of the fastest-appreciating corridors in the Mountain West.
-                </p>
-                <div class="dist-row">
-                    <span class="dist-row__place">HEBER CITY FBO</span>
-                    <span class="dist-row__time">&lt;2 MI</span>
-                </div>
-                <div class="dist-row">
-                    <span class="dist-row__place">DEER VALLEY RESORT</span>
-                    <span class="dist-row__time">15 MIN</span>
-                </div>
-                <div class="dist-row">
-                    <span class="dist-row__place">PARK CITY</span>
-                    <span class="dist-row__time">25 MIN</span>
-                </div>
-                <div class="dist-row">
-                    <span class="dist-row__place">SALT LAKE INTL.</span>
-                    <span class="dist-row__time">&lt;1 HR</span>
-                </div>
-                <div class="dist-row">
-                    <span class="dist-row__place">DOWNTOWN HEBER</span>
-                    <span class="dist-row__time">5 MIN</span>
-                </div>
-            </div>
-            <div class="location__col reveal reveal-delay-1">
-                <p class="location__label">[ The Market ]</p>
-                <h2 class="location__title">Why Heber, Why Now</h2>
-                <div class="market-item">Deer Valley's $1B expansion is 15 minutes away — driving demand across the valley</div>
-                <div class="market-item">Wasatch County is a host market for the 2034 Winter Olympics</div>
-                <div class="market-item">Heber Valley runs roughly half the price per SF of Park City — with the same access</div>
-                <div class="market-item">County population up 12% since 2020 with a $99K median household income</div>
-                <div class="market-item">Four phases, each priced independently — earlier phases lock in the lowest basis</div>
-            </div>
+<!-- Lightbox (shared) -->
+<div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image gallery">
+    <button class="lightbox__close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img class="lightbox__img" src="" alt="">
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox__cap"></div>
+</div>
+
+
+<!-- ================================================================
+     FLOOR PLANS
+     ================================================================ -->
+<section class="plans" id="floor-plans" aria-labelledby="plans-title">
+    <div class="section-head">
+        <div class="section-head__inner">
+            <h2 class="section-head__title" id="plans-title">Four<br>Floor Plans</h2>
+            <samp class="section-head__ref">SEC-04 / 4 CONFIGURATIONS</samp>
         </div>
-    </section>
+    </div>
+    <p class="plans__note" style="max-width:820px;margin:0 auto 32px auto;padding:0 24px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-mid);line-height:1.7">One building shell. Four ways to finish it. The Outlaw model is staged and open for tours — the other three are available as shells and built to the same standard on order.</p>
+    <div class="plans__grid">
+        <article class="plan reveal">
+            <img src="/assets/renders/the-hideout-interior-render-1.webp" alt="The Hideout interior rendering" style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; margin-bottom: 16px;">
+            <h3 class="plan__name">The Hideout</h3>
+            <p class="plan__type">1 Bedroom · Available now</p>
+            <p class="plan__summary">For frequent flyers and toy haulers. Maximum garage, minimum residence — a one-bedroom loft above dual offices and an oversized drive-through garage. Finished from $1.95M.</p>
+            <a class="plan__cta" href="#contact">Request Pricing</a>
+        </article>
+        <article class="plan reveal reveal-delay-1">
+            <img src="/assets/renders/the-frontier-interior-render-1.webp" alt="The Frontier interior rendering" style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; margin-bottom: 16px;">
+            <h3 class="plan__name">The Frontier</h3>
+            <p class="plan__type">2 Bedroom · Available now</p>
+            <p class="plan__summary">For families who fly in regularly. Two bedrooms, a dedicated office floor, and a full drive-through garage. Finished from $2.10M.</p>
+            <a class="plan__cta" href="#contact">Request Pricing</a>
+        </article>
+        <article class="plan reveal reveal-delay-2">
+            <img src="/assets/photos/DSC03787.webp" alt="Kitchen looking into living room" style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; margin-bottom: 16px;">
+            <h3 class="plan__name">The Outlaw</h3>
+            <p class="plan__type">3 Bedroom · Model open now</p>
+            <p class="plan__summary">For owners making Heber a primary base. Three bedrooms up top, full great room mid-floor, drive-through garage below. Finished from $2.42M.</p>
+            <a class="plan__cta" href="#contact">Request Pricing</a>
+        </article>
+        <article class="plan reveal reveal-delay-3">
+            <img src="/assets/renders/the-mercantile-interior-render-1.webp" alt="The Mercantile interior rendering" style="width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; margin-bottom: 16px;">
+            <h3 class="plan__name">The Mercantile</h3>
+            <p class="plan__type">Commercial · Available now</p>
+            <p class="plan__summary">For business owners flying into Heber. Executive office, open professional floor, and an active warehouse garage. All commercial under one roof. Finished from $2.05M.</p>
+            <a class="plan__cta" href="#contact">Request Pricing</a>
+        </article>
+    </div>
+</section>
 
-    <!-- ================================================================
-         CONTACT
-         ================================================================ -->
-    <section class="contact" id="contact">
-        <p class="contact__label reveal">[ Walk the Model Unit ]</p>
-        <h2 class="contact__title reveal">See It<br>In Person</h2>
-        <p class="contact__sub reveal">THE OUTLAW / 3-BEDROOM / FINISHED MODEL OPEN NOW</p>
-
-        <div class="contact__ctas reveal">
-            <a href="tel:+14355033293" class="btn btn--red">
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                Schedule a Walk-Through — 435.503.3293
-            </a>
+<!-- ================================================================
+     FILM / WALKTHROUGH
+     ================================================================ -->
+<section class="film" id="film" aria-labelledby="film-title">
+    <div class="film__inner">
+        <div class="film__header">
+            <h2 class="film__title reveal" id="film-title">See it in <span class="gold">motion.</span></h2>
+            <samp class="film__ref reveal">SEC-05 / WALKTHROUGH</samp>
         </div>
-
-        <p class="contact__hours reveal">OPEN HOUSE: TUES-FRI 1-5PM / SAT 11AM-3PM / NO APPOINTMENT NEEDED</p>
-    </section>
-
-    <!-- ================================================================
-         FOOTER
-         ================================================================ -->
-    <footer class="footer">
-        <div style="text-align: center; margin-bottom: 16px;">
-            <img src="VUE_horizontal_White.png" alt="VUE | Christie's International Real Estate" style="height: 24px; width: auto; display: inline-block; opacity: 0.4;">
-        </div>
-        <p class="footer__text">
-            MOUNTAIN VIEW COMMONS / HEBER CITY, UTAH<br><br>
-            &copy;2026 CHRISTIE'S INTERNATIONAL REAL ESTATE. ALL RIGHTS RESERVED. THIS CHRISTIE'S INTERNATIONAL REAL ESTATE BROKERAGE IS INDEPENDENTLY OWNED AND OPERATED. CHRISTIE'S INTERNATIONAL REAL ESTATE FULLY SUPPORTS THE PRINCIPLES OF THE FAIR HOUSING ACT AND IS AN EQUAL OPPORTUNITY EMPLOYER. ALL LISTING INFORMATION IS FROM SOURCES DEEMED RELIABLE. HOWEVER, NO REPRESENTATION IS MADE AS TO THE ACCURACY OR COMPLETENESS THEREOF AND SHOULD BE INDEPENDENTLY VERIFIED.<br><br>
-            ALL RENDERINGS AND ILLUSTRATIVE MAPS ARE ARTIST'S CONCEPTUAL RENDERINGS ONLY AND SUBJECT TO CHANGE WITHOUT NOTICE. THE DEVELOPER RESERVES THE RIGHT TO MAKE ANY MODIFICATIONS AND CHANGES AS DEEMED NECESSARY. PROPERTY SIZES, SPECIFICATIONS, AND LAYOUTS ARE APPROXIMATE ONLY AND SUBJECT TO CHANGE WITHOUT NOTICE. AMENITIES SHOWN IN RENDERINGS ARE PROPOSED. PRICES ARE SUBJECT TO CHANGE WITHOUT NOTICE. ERRORS AND OMISSIONS EXCEPTED. UNAUTHORIZED USE OF THE IMAGES, ARTIST RENDERINGS, PLANS, OR OTHER DEPICTIONS OF THE DEVELOPMENT IS STRICTLY PROHIBITED.
+        <p class="film__sub reveal">
+            A cinematic tour of Mountain View Commons — the building, the drive-through garages, and the interior finishes of the Outlaw model unit.
         </p>
-    </footer>
+        <div class="film__stage reveal" id="filmStage" role="button" tabindex="0" aria-label="Play walkthrough video">
+            <img class="film__poster" src="/assets/photos/DJI_0697.webp" alt="Mountain View Commons aerial view — walkthrough video poster">
+            <video class="film__video"
+                   id="filmVideo"
+                   preload="none"
+                   playsinline
+                   controls
+                   poster="/assets/photos/DJI_0697.webp"
+                   src="https://assets.cdn.filesafe.space/jmi9G6HcIXtki2Y1JVCz/media/69e1367f8696a78b8d68dff6.mov"></video>
+            <div class="film__overlay">
+                <button class="film__play" type="button" aria-label="Play video">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+            </div>
+            <div class="film__caption">
+                <samp>MVC / WALKTHROUGH</samp>
+                <samp>PRESS &gt; TO PLAY</samp>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================================================================
+     LOCATOR MAP (aerial corridor)
+     ================================================================ -->
+<section class="bg-paper section-block locator-map" aria-labelledby="locator-map-title" style="padding-bottom: 0; border-bottom: none;">
+    <div class="section-block__inner">
+        <div class="section-block__head">
+            <p class="section-block__eyebrow">[ The Corridor ]</p>
+            <h2 class="section-block__title" id="locator-map-title">Two miles to the runway. Fifteen to Deer Valley.</h2>
+            <p class="section-block__deck">Anchored on US-40 at the south end of Heber City. Two miles from a private runway that handles Gulfstreams. Fifteen to Deer Valley's $1B East Village expansion. Twenty to Sundance. Less than an hour to SLC International.</p>
+        </div>
+    </div>
+    
+    <figure class="locator-map__figure" style="border: none; position: relative;">
+        <picture>
+            <source media="(min-width: 1200px)" srcset="/assets/photos/mountain-view-commons-location-map-heber-valley-utah.webp" type="image/webp">
+            <source media="(min-width: 768px)" srcset="/assets/photos/mountain-view-commons-location-map-heber-valley-utah-1600.webp" type="image/webp">
+            <img src="/assets/photos/mountain-view-commons-location-map-heber-valley-utah-1200.webp"
+                 alt="Aerial map of Mountain View Commons in Heber City, Utah, looking west toward Salt Lake City. Labeled distances from the MVC site: Heber Valley Airport 2 miles, Deer Creek Reservoir 4 miles, Deer Valley Resort 14 miles, Jordanelle Reservoir 15 miles, Sundance Resort 16 miles, Park City Main Street 21 miles, Provo Airport 32 miles, Salt Lake City International Airport 54 miles."
+                 width="2400" height="1050"
+                 class="locator-map__img"
+                 style="display: block; width: 100%; height: auto;"
+                 loading="lazy"
+                 decoding="async">
+        </picture>
+        <figcaption class="locator-map__caption" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); border: none; padding: 48px max(20px, calc((100vw - 1320px) / 2)) 20px max(20px, calc((100vw - 1320px) / 2)); color: rgba(255,255,255,0.85);">
+            <span style="display: inline-block; margin-bottom: 4px;"><strong style="color: var(--gold);">FIG-01</strong> · Aerial corridor — Heber Valley, UT · view looking west</span>
+            <span style="display: block; font-size: 9px; opacity: 0.7;">Distances measured from MVC site</span>
+        </figcaption>
+    </figure>
 
-    <!-- ================================================================
-         JS
-         ================================================================ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            /* ---- Hero entrance choreography ---- */
-            var hero = document.querySelector('.hero');
-            if (hero) {
-                requestAnimationFrame(function() {
-                    hero.classList.add('hero-loaded');
-                });
-            }
+    <div class="locator-map__legend" aria-label="Distances from Mountain View Commons" style="margin-top: 0; border: none; border-bottom: 1px solid rgba(0,0,0,0.1); display: grid; background: var(--ink);">
+        <div class="locator-map__legend-item" style="border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px max(20px, calc((100vw - 1320px) / 2 / 4));">
+            <p class="locator-map__legend-key">[ Heber Valley Airport ]</p>
+            <p class="locator-map__legend-val"><span class="num">2</span><span class="unit">mi</span></p>
+        </div>
+        <div class="locator-map__legend-item" style="border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px 20px;">
+            <p class="locator-map__legend-key">[ Deer Valley Resort ]</p>
+            <p class="locator-map__legend-val"><span class="num">14</span><span class="unit">mi</span></p>
+        </div>
+        <div class="locator-map__legend-item" style="border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px 20px;">
+            <p class="locator-map__legend-key">[ Park City Main Street ]</p>
+            <p class="locator-map__legend-val"><span class="num">21</span><span class="unit">mi</span></p>
+        </div>
+        <div class="locator-map__legend-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 24px max(20px, calc((100vw - 1320px) / 2 / 4));">
+            <p class="locator-map__legend-key">[ SLC International ]</p>
+            <p class="locator-map__legend-val"><span class="num">54</span><span class="unit">mi</span></p>
+        </div>
+    </div>
+</section>
 
-            /* ---- Scroll reveals (blur + slide) ---- */
-            var reveals = document.querySelectorAll('.reveal');
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
-            reveals.forEach(function(el) { observer.observe(el); });
+<!-- ================================================================
+     LOCATION PREVIEW
+     ================================================================ -->
+<section class="two-col" id="location" aria-labelledby="location-title">
+    <h2 id="location-title" style="position:absolute;left:-9999px;">Location and Heber Valley Market</h2>
+    <div class="two-col__grid">
+        <div class="two-col__col reveal">
+            <p class="two-col__label">[ Location ]</p>
+            <h3 class="two-col__title">Hwy 40 + Airport Rd, Heber City</h3>
+            <p class="two-col__body">
+                On U.S. Highway 40, half a mile east of Hwy 189, less than two miles from the Heber Valley Airport. Direct corridor access to Deer Valley, Park City, Sundance, and the Salt Lake International Airport.
+            </p>
+            <div class="dist-row"><span class="dist-row__place">Heber Valley Airport (HCR)</span><span class="dist-row__time">&lt;2 MI</span></div>
+            <div class="dist-row"><span class="dist-row__place">Downtown Heber City</span><span class="dist-row__time">5 MIN</span></div>
+            <div class="dist-row"><span class="dist-row__place">Deer Valley East Village</span><span class="dist-row__time">15 MIN</span></div>
+            <div class="dist-row"><span class="dist-row__place">Park City Mountain Resort</span><span class="dist-row__time">25 MIN</span></div>
+            <div class="dist-row"><span class="dist-row__place">Sundance Resort</span><span class="dist-row__time">20 MIN</span></div>
+            <div class="dist-row"><span class="dist-row__place">Salt Lake International Airport</span><span class="dist-row__time">&lt;1 HR</span></div>
+        </div>
+        <div class="two-col__col reveal reveal-delay-1">
+            <p class="two-col__label">[ Why Heber, Why Now ]</p>
+            <h3 class="two-col__title">A market in motion.</h3>
+            <div class="market-item">Deer Valley's $1B East Village expansion is 15 minutes away — driving demand across the Wasatch Back.</div>
+            <div class="market-item">Wasatch County is a host market for the 2034 Winter Olympics.</div>
+            <div class="market-item">Heber Valley runs roughly half the price-per-square-foot of Park City — with the same access.</div>
+            <div class="market-item">County population up 12.19% since 2020. Median household income $98,934.</div>
+            <div class="market-item">Four-phase release. Each phase prices independently — earlier phases lock the lowest basis.</div>
+            <div class="market-item">No direct competitor product in the Heber/Park City corridor for this combination of price, footprint, and zoning.</div>
+        </div>
+    </div>
+</section>
 
-            /* ---- Nav scroll state (two-layer VIDL pattern) ---- */
-            var navBar = document.querySelector('.nav-bar');
-            var navigation = document.querySelector('.navigation');
-            var ticking = false;
+<!-- ================================================================
+     FAQ TEASER
+     ================================================================ -->
+<section class="bg-paper section-block" aria-labelledby="faq-title">
+    <div class="section-block__inner">
+        <div class="section-block__head">
+            <p class="section-block__eyebrow">[ Frequently Asked ]</p>
+            <h2 class="section-block__title" id="faq-title">The questions buyers ask first.</h2>
+            <p class="section-block__deck">Pricing, zoning, nightly rentals, and how to combine units. Anything else, the on-site team can walk through during a tour.</p>
+        </div>
+        <div class="faq-list" style="border-top:1px solid var(--ink);">
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="true" aria-controls="faq-1" type="button">
+                    <span class="faq-q__text">What is Mountain View Commons?</span>
+                    <svg class="faq-q__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-a" id="faq-1" style="max-height:600px">
+                    <div class="faq-a__inner">
+                        <p>Mountain View Commons (MVC) is a 43-unit mixed-use flex space development in Heber City, Utah. Each unit is roughly 5,000 square feet across three floors with a 30' x 60' footprint per floor, drive-through garage doors on the ground level, and zoning for residential, commercial, and warehouse use under one roof.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false" aria-controls="faq-2" type="button">
+                    <span class="faq-q__text">How much does a unit cost?</span>
+                    <svg class="faq-q__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-a" id="faq-2">
+                    <div class="faq-a__inner">
+                        <p>Interior gray-shell units start at $1,050,000 (~$200/SF). End and duplex shells are $1,250,000 (~$250/SF). Finished, turnkey packages with a certificate of occupancy run $1,950,000 to $2,420,000 (~$400/SF) depending on the floor plan. Each phase releases at a higher price than the previous one.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false" aria-controls="faq-3" type="button">
+                    <span class="faq-q__text">Are nightly rentals allowed?</span>
+                    <svg class="faq-q__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-a" id="faq-3">
+                    <div class="faq-a__inner">
+                        <p>Yes. Mountain View Commons permits nightly rentals — useful for owners who want to lease the residential floors when not in use, or run a short-term rental as part of an investment strategy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false" aria-controls="faq-4" type="button">
+                    <span class="faq-q__text">Can I combine multiple units?</span>
+                    <svg class="faq-q__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-a" id="faq-4">
+                    <div class="faq-a__inner">
+                        <p>Yes. Demising walls between adjacent units can be removed to combine two, three, or more units horizontally. One owner has already combined multiple units into a single building — ground floor warehouse, second floor showroom, third floor studio space.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" aria-expanded="false" aria-controls="faq-5" type="button">
+                    <span class="faq-q__text">When is the model unit open?</span>
+                    <svg class="faq-q__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-a" id="faq-5">
+                    <div class="faq-a__inner">
+                        <p>The Outlaw model is open Tuesday through Friday 1–5 PM and Saturday 11 AM–3 PM. No appointment is required during open hours. Private tours are available by calling <a href="tel:+14355033293" style="color:var(--gold-deep);border-bottom:1px solid var(--gold-deep)">435.503.3293</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(function() {
-                        var scrolled = window.pageYOffset > 80;
-                        if (navBar) navBar.classList.toggle('scrolled', scrolled);
-                        if (navigation) navigation.classList.toggle('scrolled', scrolled);
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
+<!-- ================================================================
+     INLINE LEAD FORM (LP form anchor — `id=contact`)
+     ================================================================ -->
+<section class="bg-paper section-block" id="contact" aria-labelledby="contact-title" style="border-bottom:0">
+    <div class="section-block__inner">
+        <div class="section-block__head">
+            <p class="section-block__eyebrow">[ Schedule a Walk-Through ]</p>
+            <h2 class="section-block__title" id="contact-title">Land. Walk in.</h2>
+            <p class="section-block__deck">
+                Fly into HCR, drive over, and walk the Outlaw model. The on-site team handles private tours, pricing, hangar pairings, and combined-unit questions. Call <a href="tel:+14355033293" style="color:var(--gold-deep);border-bottom:1px solid var(--gold-deep)">435.503.3293</a> or send the form below.
+            </p>
+        </div>
 
-            /* ---- Film / walkthrough video ---- */
-            var filmStage = document.getElementById('filmStage');
-            var filmVideo = document.getElementById('filmVideo');
-            if (filmStage && filmVideo) {
-                var startFilm = function() {
-                    if (filmStage.classList.contains('is-playing')) return;
-                    filmStage.classList.add('is-playing');
-                    filmVideo.play().catch(function() {
-                        filmStage.classList.remove('is-playing');
-                    });
-                };
-                filmStage.addEventListener('click', startFilm);
-                filmStage.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        startFilm();
-                    }
-                });
-                filmVideo.addEventListener('pause', function() {
-                    if (filmVideo.ended) {
-                        filmStage.classList.remove('is-playing');
-                    }
-                });
-                filmVideo.addEventListener('ended', function() {
-                    filmStage.classList.remove('is-playing');
-                    filmVideo.currentTime = 0;
-                });
-            }
+        <form id="contact-form" class="form" action="https://services.leadconnectorhq.com/hooks/jmi9G6HcIXtki2Y1JVCz/webhook-trigger/a2cbef9b-4a5e-4c67-96b1-4004c556be7b" method="POST" aria-label="Contact form" novalidate data-source="MVC LP — Fly (Direct Mail)">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
 
-            /* ---- Reduced motion: disable all animations ---- */
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.documentElement.style.setProperty('--motion-duration', '0.01ms');
-                document.querySelectorAll('.reveal').forEach(function(el) {
-                    el.classList.add('visible');
-                });
-                if (hero) hero.classList.add('hero-loaded');
-            }
-        });
-    </script>
+            <div class="form__row">
+                <div class="form__field">
+                    <label class="form__label" for="name">Name</label>
+                    <input class="form__input" type="text" id="name" name="Name" required autocomplete="name">
+                </div>
+                <div class="form__field">
+                    <label class="form__label" for="email">Email</label>
+                    <input class="form__input" type="email" id="email" name="Email" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="form__row">
+                <div class="form__field">
+                    <label class="form__label" for="phone">Phone</label>
+                    <input class="form__input" type="tel" id="phone" name="Phone" autocomplete="tel">
+                </div>
+                <div class="form__field">
+                    <label class="form__label" for="interest">I'm interested in</label>
+                    <select class="form__select" id="interest" name="Interest">
+                        <option value="">Select an option</option>
+                        <option selected>Scheduling a private tour</option>
+                        <option>Pricing — The Outlaw (3BR)</option>
+                        <option>Pricing — The Frontier (2BR)</option>
+                        <option>Pricing — The Hideout (1BR)</option>
+                        <option>Pricing — The Mercantile (commercial)</option>
+                        <option>Buying a shell unit</option>
+                        <option>Investor information</option>
+                        <option>Combining multiple units</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form__field">
+                <label class="form__label" for="message">Message</label>
+                <textarea class="form__textarea" id="message" name="Message" rows="5" placeholder="Tell us a bit about your timeline, budget, or use case."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--gold form__submit">Schedule My Walk-Through</button>
+            <p class="form__hint" id="form-status" role="status" aria-live="polite">Goes straight to the on-site team and the broker — never a marketing list. Replies typically within an hour during open hours. For anything urgent, call <a href="tel:+14355033293" style="color:var(--gold-deep)">435.503.3293</a>.</p>
+        </form>
+    </div>
+</section>
+
+<!-- ================================================================
+     CTA BANNER (phone fallback)
+     ================================================================ -->
+<section class="cta-banner" id="contact-cta">
+    <p class="cta-banner__label reveal">[ Or Call Us Directly ]</p>
+    <h2 class="cta-banner__title reveal">Wheels Down.<br>Walk Home.</h2>
+    <p class="cta-banner__sub reveal">The Outlaw model is open Tues–Sat · &lt;2 mi from HCR</p>
+    <div class="btn-row reveal" style="justify-content:center">
+        <a href="tel:+14355033293" class="btn btn--gold">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call 435.503.3293
+        </a>
+    </div>
+    <p class="cta-banner__hours reveal">Open House · Tues–Fri 1–5 PM · Sat 11 AM–3 PM</p>
+</section>
+
+</main>
+
+<!-- ================================================================
+     FOOTER (LP — minimal)
+     ================================================================ -->
+<footer class="footer footer--lp">
+    <div class="footer__grid footer__grid--lp">
+        <div class="footer__brand">
+            <img src="/assets/mvc-logo-dark.png" alt="Mountain View Commons">
+            <p class="footer__addr">
+                Mountain View Commons<br>
+                Hwy 40 + Airport Rd<br>
+                Heber City, UT 84032<br><br>
+                <a href="tel:+14355033293" style="color:var(--gold)">435.503.3293</a><br>
+                <a href="mailto:jonathan.crosswhite@vuere.com" style="color:var(--gold)">Email broker</a>
+            </p>
+        </div>
+        <div>
+            <p class="footer__col-title">[ Open House ]</p>
+            <ul class="footer__list">
+                <li>Tues–Fri 1 – 5 PM</li>
+                <li>Saturday 11 AM – 3 PM</li>
+                <li>No appointment needed</li>
+                <li><a href="#contact">Schedule a tour →</a></li>
+                <li><a href="/fly/gallery.html">View full gallery →</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        <img src="/assets/vue-dark.png" alt="VUE | Christie's International Real Estate" width="163" height="22" loading="lazy" decoding="async">
+        <p class="footer__copy">©2026 Mountain View Commons</p>
+    </div>
+    <div class="footer__legal">
+        <p>©2026 Christie's International Real Estate. All rights reserved. This Christie's International Real Estate brokerage is independently owned and operated. Christie's International Real Estate fully supports the principles of the Fair Housing Act and is an Equal Opportunity Employer. All listing information is from sources deemed reliable. However, no representation is made as to the accuracy or completeness thereof and should be independently verified.</p>
+        <p>All renderings and illustrative maps are artist's conceptual renderings only and subject to change without notice. The developer reserves the right to make any modifications and changes as deemed necessary. Property sizes, specifications, and layouts are approximate only and subject to change without notice. Amenities shown in renderings are proposed. Prices are subject to change without notice. Errors and omissions excepted. Unauthorized use of the images, artist renderings, plans, or other depictions of the development is strictly prohibited.</p>
+    </div>
+    <a class="footer__top-link" href="#" aria-label="Back to top">Back to top ↑</a>
+</footer>
+
+<script src="/assets/site.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,42 @@
+# Mountain View Commons / robots.txt
+# Updated 2026-04-26
+#
+# We allow major AI crawlers so MVC content can surface in
+# AI search experiences (ChatGPT, Perplexity, Google AI Overviews,
+# Claude). Brand mentions in AI answers correlate ~3x more strongly
+# with discovery than backlinks. We want to be quotable.
+
+User-agent: *
+Allow: /
+
+# AI search crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin / search params / dev docs
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /docs/
+
+Sitemap: https://www.mtnviewcommonsut.com/sitemap.xml

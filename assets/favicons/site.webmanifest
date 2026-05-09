@@ -1,0 +1,25 @@
+{
+    "name": "Mountain View Commons",
+    "short_name": "MVC",
+    "description": "43 mixed-use flex units in Heber City, Utah. Live, work, and store under one roof.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#130C0E",
+    "theme_color": "#130C0E",
+    "icons": [
+        {
+            "src": "/assets/favicons/web-app-manifest-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/assets/favicons/web-app-manifest-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
