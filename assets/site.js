@@ -240,6 +240,8 @@
             var submitBtn = contactForm.querySelector('.form__submit');
             var endpoint = contactForm.getAttribute('action');
             var source = contactForm.getAttribute('data-source') || 'Website Form';
+            var fallbackPhoneHref = contactForm.getAttribute('data-fallback-phone-href') || '+14352144396';
+            var fallbackPhoneDisplay = contactForm.getAttribute('data-fallback-phone-display') || '435.214.4396';
             var defaultHint = formStatus ? formStatus.textContent : '';
 
             var setStatus = function (msg, tone) {
@@ -250,7 +252,26 @@
                     : '';
             };
 
-            var showSuccess = function () {
+            // Render the visual confirmation. Used for real submissions AND for
+            // honeypot-tripped bot submissions, so the bot believes it succeeded.
+            var renderSuccessUI = function () {
+                var success = document.createElement('div');
+                success.className = 'form__success';
+                success.setAttribute('role', 'status');
+                success.innerHTML =
+                    '<p class="section-block__eyebrow">[ Inquiry Sent ]</p>' +
+                    '<h3 class="section-block__title" style="margin-bottom:16px">Thanks — we\u2019ll be in touch.</h3>' +
+                    '<p class="section-block__deck" style="margin-bottom:0">' +
+                        'Your inquiry just landed with the on-site sales team. They typically respond within an hour during open house hours (Tues\u2013Fri 1\u20135 PM, Sat 11 AM\u20133 PM).<br><br>' +
+                        'For an immediate response, call <a href="tel:' + fallbackPhoneHref + '" style="color:var(--gold-deep);border-bottom:1px solid rgba(201,168,76,0.5)">' + fallbackPhoneDisplay + '</a>.' +
+                    '</p>';
+                contactForm.replaceWith(success);
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            };
+
+            // Fire conversion tracking. Only called for verified-human submissions —
+            // never for honeypot trips, so bot traffic doesn't inflate Pixel/GTM metrics.
+            var fireConversionTracking = function () {
                 window.dataLayer = window.dataLayer || [];
                 window.dataLayer.push({
                     event: 'form_submit_success',
@@ -263,20 +284,11 @@
                         content_category: 'Real Estate'
                     });
                 }
+            };
 
-                var wrap = contactForm.parentNode;
-                var success = document.createElement('div');
-                success.className = 'form__success';
-                success.setAttribute('role', 'status');
-                success.innerHTML =
-                    '<p class="section-block__eyebrow">[ Inquiry Sent ]</p>' +
-                    '<h3 class="section-block__title" style="margin-bottom:16px">Thanks — we\u2019ll be in touch.</h3>' +
-                    '<p class="section-block__deck" style="margin-bottom:0">' +
-                        'Your inquiry just landed with the on-site sales team. They typically respond within an hour during open house hours (Tues\u2013Fri 1\u20135 PM, Sat 11 AM\u20133 PM).<br><br>' +
-                        'For an immediate response, call <a href="tel:+14352222716" style="color:var(--gold-deep);border-bottom:1px solid rgba(201,168,76,0.5)">435.222.2716</a>.' +
-                    '</p>';
-                contactForm.replaceWith(success);
-                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            var showSuccess = function () {
+                fireConversionTracking();
+                renderSuccessUI();
             };
 
             var validate = function () {
@@ -295,9 +307,12 @@
             contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
+                // Honeypot: hidden field bots will fill but humans never see.
+                // Show the success UI so the bot thinks it worked, but skip the
+                // webhook POST and skip Pixel/GTM tracking so metrics stay clean.
                 var honey = contactForm.querySelector('input[name="_honey"]');
                 if (honey && honey.value) {
-                    showSuccess();
+                    renderSuccessUI();
                     return;
                 }
 
@@ -315,6 +330,16 @@
                     submittedAt: new Date().toISOString()
                 };
 
+                // Pull marketing attribution params (Meta utm_*, fbclid; Google gclid) off the URL
+                // so the CRM can map them to contact fields without parsing the page URL string.
+                try {
+                    var params = new URLSearchParams(window.location.search);
+                    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id','fbclid','gclid'].forEach(function (k) {
+                        var v = params.get(k);
+                        if (v) data[k] = v;
+                    });
+                } catch (e) { /* older browsers without URLSearchParams — skip */ }
+
                 if (submitBtn) {
                     submitBtn.disabled = true;
                     submitBtn.textContent = 'Sending\u2026';
@@ -327,7 +352,7 @@
                         submitBtn.textContent = 'Schedule My Tour';
                     }
                     setStatus(
-                        'Something went wrong sending your inquiry. Please call 435.222.2716 or email jonathan.crosswhite@vuere.com directly.',
+                        'Something went wrong sending your inquiry. Please call ' + fallbackPhoneDisplay + ' or email jonathan.crosswhite@vuere.com directly.',
                         'error'
                     );
                 };
